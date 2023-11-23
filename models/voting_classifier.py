@@ -66,23 +66,23 @@ Voting Classifier with Hard Voting Classification Report:
 
               precision    recall  f1-score   support
 
-           0       0.95      0.79      0.86       941
-           1       0.00      0.00      0.00        41
+           0       0.95      0.81      0.87       940
+           1       0.00      0.00      0.00        42
 
-    accuracy                           0.75       982
-   macro avg       0.47      0.39      0.43       982
-weighted avg       0.91      0.75      0.82       982
+    accuracy                           0.77       982
+   macro avg       0.47      0.40      0.44       982
+weighted avg       0.91      0.77      0.84       982
 
 Voting Classifier with Soft Voting Classification Report:
 
               precision    recall  f1-score   support
 
-           0       0.94      0.75      0.84       941
-           1       0.00      0.00      0.00        41
+           0       0.95      0.78      0.85       940
+           1       0.00      0.00      0.00        42
 
-    accuracy                           0.72       982
-   macro avg       0.47      0.37      0.42       982
-weighted avg       0.91      0.72      0.80       982
+    accuracy                           0.75       982
+   macro avg       0.47      0.39      0.43       982
+weighted avg       0.91      0.75      0.82       982
 
 '''
 
@@ -108,11 +108,11 @@ CM_soft = confusion_matrix(y_test, y_pred_soft)
 
 '''
 Confusion Matrix for Hard Voting is : 
- [[759 182]
- [ 41   0]]
+ [[760 180]
+ [ 42   0]]
 Confusion Matrix for Soft Voting is : 
- [[699 242]
- [ 41   0]]
+ [[732 208]
+ [ 42   0]]
 '''
 
 # cross val scores
@@ -126,5 +126,5 @@ c.append(cross_val_score(clf4, X_train, y_train, scoring='accuracy', cv=10).mean
 
 '''
 Cross val scores from above print statement:
-[0.92721212142675, 0.9047380088959402, 0.8371614443153808, 0.9318722200186984]
+[0.9317819148936171, 0.8861702127659574, 0.8606382978723406, 0.9339095744680851]
 '''
