@@ -22,6 +22,7 @@ user_input={
 	'smoking_status' : None
 }
 
+AVG_GLUCOSE = 105.3
 
 class App(ctk.CTk):
     width = 900
@@ -148,7 +149,7 @@ class App(ctk.CTk):
 
 
         self.residence_type = tkinter.StringVar()
-        self.residence_label = ctk.CTkLabel(self.about_frame, text="Have you ever been married?", font=ctk.CTkFont(size=20, weight="bold"))
+        self.residence_label = ctk.CTkLabel(self.about_frame, text="What is your residence type?", font=ctk.CTkFont(size=20, weight="bold"))
         self.residence_label.grid(row=6, column=0, padx=30, pady=(15, 15))
         self.residence_button_1 = ctk.CTkRadioButton(self.about_frame, variable=self.residence_type, value="Urban", text="Urban")
         self.residence_button_1.grid(row=7, column=0, pady=10, padx=20, sticky="w")
@@ -211,44 +212,80 @@ class App(ctk.CTk):
         def showWeight(value):
             self.weight_value_label.configure(text=f"{int(value)} lbs")
 
-        self.about_frame.grid_forget()
-        self.status_frame = ctk.CTkFrame(self, corner_radius=0, fg_color="transparent")
-        self.status_frame.grid(row=0, column=0, sticky="ns")
+        self.status_frame.grid_forget()
+        self.body_frame = ctk.CTkFrame(self, corner_radius=0, fg_color="transparent")
+        self.body_frame.grid(row=0, column=0, sticky="ns")
 
-        self.heart_label = ctk.CTkLabel(self.status_frame, text="What is your height?", font=ctk.CTkFont(size=20, weight="bold"))
+        self.heart_label = ctk.CTkLabel(self.body_frame, text="What is your height?", font=ctk.CTkFont(size=20, weight="bold"))
         self.heart_label.grid(row=1, column=0, padx=30, pady=(100, 15))
-        self.height_value_label = ctk.CTkLabel(self.status_frame, text="3 ft 0 inches", font=ctk.CTkFont(size=10, weight="bold"))
+        self.height_value_label = ctk.CTkLabel(self.body_frame, text="3 ft 0 inches", font=ctk.CTkFont(size=10, weight="bold"))
         self.height_value_label.grid(row=2, column=0, padx=30, pady=(15, 0))
         self.height = tkinter.IntVar()
-        self.height_scale = ctk.CTkSlider(self.status_frame, from_=36, to=95, orientation='horizontal', width=350, variable=self.height, command=showHeight)
+        self.height.set(36)
+        self.height_scale = ctk.CTkSlider(self.body_frame, from_=36, to=95, orientation='horizontal', width=350, variable=self.height, command=showHeight)
         self.height_scale.grid(row=3, column=0, padx=30, pady=(0, 30))
 
-        self.weight_label = ctk.CTkLabel(self.status_frame, text="What is your weight?", font=ctk.CTkFont(size=20, weight="bold"))
+        self.weight_label = ctk.CTkLabel(self.body_frame, text="What is your weight?", font=ctk.CTkFont(size=20, weight="bold"))
         self.weight_label.grid(row=4, column=0, padx=30, pady=(15, 15))
-        self.weight_value_label = ctk.CTkLabel(self.status_frame, text="50 lbs", font=ctk.CTkFont(size=10, weight="bold"))
+        self.weight_value_label = ctk.CTkLabel(self.body_frame, text="50 lbs", font=ctk.CTkFont(size=10, weight="bold"))
         self.weight_value_label.grid(row=5, column=0, padx=30, pady=(15, 0))
         self.weight =  tkinter.IntVar()
-        self.weight_scale = ctk.CTkSlider(self.status_frame, from_=50, to=500, orientation='horizontal', width=350, variable=self.weight, command=showWeight)
+        self.weight.set(50)
+        self.weight_scale = ctk.CTkSlider(self.body_frame, from_=50, to=500, orientation='horizontal', width=350, variable=self.weight, command=showWeight)
         self.weight_scale.grid(row=6, column=0, padx=30, pady=(0, 15))
 
-        self.next_button = ctk.CTkButton(self.status_frame, text="Next", command=self.results, width=400, height=40, bg_color='blue')
+        self.next_button = ctk.CTkButton(self.body_frame, text="Next", command=self.Q6_Glucose, width=400, height=40, bg_color='blue')
         self.next_button.grid(row=7, column=0, padx=30, pady=(15, 15))
 
-        self.id_error_label = ctk.CTkLabel(self.status_frame, text="", font=ctk.CTkFont(size=15), text_color='red')
+        self.id_error_label = ctk.CTkLabel(self.body_frame, text="", font=ctk.CTkFont(size=15), text_color='red')
         self.id_error_label.grid(row=8, column=0, padx=30, pady=(15, 15))
+    
+    def Q6_Glucose(self):
+        def showGlucose(value):
+            self.glucose_value_label.configure(text=f"{int(value)} mg/dL")
+
+        def skipQuestion():
+            self.skip = True
+            self.results()
+
+        self.body_frame.grid_forget()
+        self.glucose_frame = ctk.CTkFrame(self, corner_radius=0, fg_color="transparent")
+        self.glucose_frame.grid(row=0, column=0, sticky="ns")
+        
+        self.glucose_label = ctk.CTkLabel(self.glucose_frame, text="What is your glucose level?\n(Can skip if unknown)", font=ctk.CTkFont(size=20, weight="bold"))
+        self.glucose_label.grid(row=1, column=0, padx=30, pady=(100, 15))
+        self.glucose_value_label = ctk.CTkLabel(self.glucose_frame, text="50 mg/dL", font=ctk.CTkFont(size=10, weight="bold"))
+        self.glucose_value_label.grid(row=2, column=0, padx=30, pady=(15, 0))
+        self.glucose = tkinter.IntVar()
+        self.glucose.set(50)
+        self.glucose_scale = ctk.CTkSlider(self.glucose_frame, from_=50, to=275, orientation='horizontal', width=350, variable=self.glucose, command=showGlucose)
+        self.glucose_scale.grid(row=3, column=0, padx=30, pady=(0, 30))
+
+        self.skip = False
+        self.next_button = ctk.CTkButton(self.glucose_frame, text="Skip", command=skipQuestion, width=400, height=40, fg_color='gray')
+        self.next_button.grid(row=4, column=0, padx=30, pady=(15, 15))
+        self.skip_button = ctk.CTkButton(self.glucose_frame, text="Next", command=self.results, width=400, height=40, bg_color='blue')
+        self.skip_button.grid(row=5, column=0, padx=30, pady=(15, 15))
+
+        self.id_error_label = ctk.CTkLabel(self.glucose_frame, text="", font=ctk.CTkFont(size=15), text_color='red')
+        self.id_error_label.grid(row=6, column=0, padx=30, pady=(15, 15))
 
     def results(self):
-        # user_input["sex"] = self.sex.get()
-        # user_input["age"] = self.age_entry.get()
-        # user_input["hypertension"] = self.hypertension.get()
-        # user_input["heart_disease"] = self.heart_disease.get()
-        # user_input["ever_married"] = self.ever_married.get()
-        # user_input["work_type"] = self.work_type.get()
-        # user_input["residence_type"] = self.residence_type.get()
-        # user_input["avg_glucose_level"] = 0
-        # user_input["bmi"] = round((self.weight.get()/2.20462)/((self.height.get() * 0.0254)**2), 1)
-        # user_input["smoking_status"] = self.smoking_status.get()
-        # print(user_input)
+        if self.skip:
+            user_input["avg_glucose_level"] = AVG_GLUCOSE
+        else:
+            user_input["avg_glucose_level"] = self.glucose.get()
+
+        #user_input["sex"] = self.sex.get()
+        #user_input["age"] = self.age.get()
+        #user_input["hypertension"] = self.hypertension.get()
+        #user_input["heart_disease"] = self.heart_disease.get()
+        #user_input["ever_married"] = self.ever_married.get()
+        #user_input["work_type"] = self.work_type.get()
+        #user_input["residence_type"] = self.residence_type.get()
+        #user_input["bmi"] = round((self.weight.get()/2.20462)/((self.height.get() * 0.0254)**2), 1)
+        #user_input["smoking_status"] = self.smoking_status.get()
+        #print(user_input)
 
         # user_input={
         #     'Residence_type_Rural'
