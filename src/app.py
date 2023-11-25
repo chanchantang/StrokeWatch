@@ -55,7 +55,7 @@ class App(ctk.CTk):
         self.start_label.grid(row=1, column=0, padx=30, pady=(15, 15))
         self.start_checkbox = ctk.CTkCheckBox(self.start_frame, text="I have read, understood and agree to the above")
         self.start_checkbox.grid(row=2, column=0, padx=50, pady=(100, 0), sticky="w")
-        self.login_button = ctk.CTkButton(self.start_frame, text="Start", command=self.Q1_identity, width=400, height=40,       bg_color='blue')
+        self.login_button = ctk.CTkButton(self.start_frame, text="Start", command=self.Q1_Identity, width=400, height=40,       bg_color='blue')
         self.login_button.grid(row=3, column=0, padx=30, pady=(15, 15))
         self.error_label = ctk.CTkLabel(self.start_frame, text="", font=ctk.CTkFont(size=15), text_color='red')
         self.error_label.grid(row=4, column=0, padx=30, pady=(15, 15))
@@ -77,33 +77,35 @@ class App(ctk.CTk):
         self.back_button.grid(row=1, column=0, padx=30, pady=(15, 15))
         self.main_frame.grid(row=0, column=0, sticky="nsew", padx=100)
     
-    def Q1_identity(self):
+    def Q1_Identity(self):
         self.start_frame.grid_forget()
         self.id_frame = ctk.CTkFrame(self, corner_radius=0, fg_color="transparent")
         self.id_frame.grid(row=0, column=0, sticky="ns")
 
         self.id_label = ctk.CTkLabel(self.id_frame, text="Please provide your name so that\nwe may offer you a personalized experience", font=ctk.CTkFont(size=20, weight="bold"))
-        self.id_label.grid(row=1, column=0, padx=30, pady=(150, 15))
+        self.id_label.grid(row=1, column=0, padx=30, pady=(150, 15), columnspan=2)
 
         self.name_entry = ctk.CTkEntry(self.id_frame, width=400, height=40, placeholder_text="Your first name")
-        self.name_entry.grid(row=2, column=0, padx=30, pady=(15, 15))
+        self.name_entry.grid(row=2, column=0, padx=30, pady=(15, 15), columnspan=2)
 
-        self.next_button = ctk.CTkButton(self.id_frame, text="Next", command=self.Q2_self, width=400, height=40,       bg_color='blue')
-        self.next_button.grid(row=3, column=0, padx=30, pady=(15, 15))
+        self.previous_button = ctk.CTkButton(self.id_frame, text="Previous", command=lambda:self.previous(self.id_frame, self.start_page), width=200, height=40,       bg_color='blue')
+        self.previous_button.grid(row=3, column=0, padx=15, pady=(15, 15))
+        self.next_button = ctk.CTkButton(self.id_frame, text="Next", command=self.Q2_Self, width=200, height=40,       bg_color='blue')
+        self.next_button.grid(row=3, column=1, padx=15, pady=(15, 15))
 
         self.id_error_label = ctk.CTkLabel(self.id_frame, text="", font=ctk.CTkFont(size=15), text_color='red')
-        self.id_error_label.grid(row=4, column=0, padx=30, pady=(15, 15))
+        self.id_error_label.grid(row=4, column=0, padx=30, pady=(15, 15), columnspan=2)
 
-    def Q2_self(self):
+    def Q2_Self(self):
         def showAge(value):
-            self.age_value_label.configure(text=int(value))  
+            self.age_value_label.configure(text=int(value))
 
         self.id_frame.grid_forget()
         self.self_frame = ctk.CTkFrame(self, corner_radius=0, fg_color="transparent")
         self.self_frame.grid(row=0, column=0, sticky="ns")
 
         self.sex_label = ctk.CTkLabel(self.self_frame, text="Sex at Birth", font=ctk.CTkFont(size=20, weight="bold"))
-        self.sex_label.grid(row=1, column=0, padx=30, pady=(150, 15))
+        self.sex_label.grid(row=1, column=0, padx=30, pady=(150, 15), columnspan=2)
         self.sex = tkinter.StringVar()
         self.sex_button_1 = ctk.CTkRadioButton(self.self_frame, variable=self.sex, value='Male', text="Male")
         self.sex_button_1.grid(row=2, column=0, pady=10, padx=20, sticky="w")
@@ -111,17 +113,18 @@ class App(ctk.CTk):
         self.sex_button_2.grid(row=3, column=0, pady=10, padx=20, sticky="w")
         self.sex_button_1.invoke()
 
-
         self.age_label = ctk.CTkLabel(self.self_frame, text="Age", font=ctk.CTkFont(size=20, weight="bold"))
-        self.age_label.grid(row=4, column=0, padx=30, pady=(15, 15))
+        self.age_label.grid(row=4, column=0, padx=30, pady=(15, 15), columnspan=2)
         self.age_value_label = ctk.CTkLabel(self.self_frame, text="1", font=ctk.CTkFont(size=15, weight="bold"))
-        self.age_value_label.grid(row=6, column=0, padx=30, pady=(15, 0))
+        self.age_value_label.grid(row=6, column=0, padx=30, pady=(15, 0), columnspan=2)
         self.age = ctk.IntVar()
         self.age_scale = ctk.CTkSlider(self.self_frame, from_=1, to=110, orientation='horizontal', width=350, variable=self.age, command=showAge)
-        self.age_scale.grid(row=7, column=0, padx= 30, pady=(15, 15))
+        self.age_scale.grid(row=7, column=0, padx= 30, pady=(15, 15), columnspan=2)
 
-        self.next_button = ctk.CTkButton(self.self_frame, text="Next", command=self.Q3_About, width=400, height=40,       bg_color='blue')
-        self.next_button.grid(row=8, column=0, padx=30, pady=(15, 15))
+        self.previous_button = ctk.CTkButton(self.self_frame, text="Previous", command=lambda:self.previous(self.self_frame, self.Q1_Identity), width=200, height=40,       bg_color='blue')
+        self.previous_button.grid(row=8, column=0, padx=15, pady=(15, 15))
+        self.next_button = ctk.CTkButton(self.self_frame, text="Next", command=self.Q3_About, width=200, height=40,       bg_color='blue')
+        self.next_button.grid(row=8, column=1, padx=15, pady=(15, 15))
 
         self.id_error_label = ctk.CTkLabel(self.self_frame, text="", font=ctk.CTkFont(size=15), text_color='red')
         self.id_error_label.grid(row=9, column=0, padx=30, pady=(15, 15))
@@ -132,7 +135,7 @@ class App(ctk.CTk):
         self.about_frame.grid(row=0, column=0, sticky="ns")
 
         self.married_label = ctk.CTkLabel(self.about_frame, text="Have you ever been married?", font=ctk.CTkFont(size=20, weight="bold"))
-        self.married_label.grid(row=1, column=0, padx=30, pady=(100, 15))
+        self.married_label.grid(row=1, column=0, padx=30, pady=(100, 15), columnspan=2)
         self.ever_married = tkinter.StringVar()
         self.married_button_1 = ctk.CTkRadioButton(self.about_frame, variable=self.ever_married, value="Yes", text="Yes")
         self.married_button_1.grid(row=2, column=0, pady=10, padx=20, sticky="w")
@@ -142,24 +145,24 @@ class App(ctk.CTk):
 
         self.work_type = tkinter.StringVar()
         self.work_label = ctk.CTkLabel(self.about_frame, text="What is your work type?", font=ctk.CTkFont(size=20, weight="bold"))
-        self.work_label.grid(row=4, column=0, padx=30, pady=(15, 15))
+        self.work_label.grid(row=4, column=0, padx=30, pady=(15, 15), columnspan=2)
         self.work_menu = ctk.CTkOptionMenu(self.about_frame, values=["Self-employed", "Children", "Government job", "Private", "Never worked"], variable=self.work_type)
         self.work_menu.set("Self-employed")
-        self.work_menu.grid(row=5, column=0, padx=30, pady=(15, 15))
-
+        self.work_menu.grid(row=5, column=0, padx=30, pady=(15, 15), columnspan=2)
 
         self.residence_type = tkinter.StringVar()
         self.residence_label = ctk.CTkLabel(self.about_frame, text="What is your residence type?", font=ctk.CTkFont(size=20, weight="bold"))
-        self.residence_label.grid(row=6, column=0, padx=30, pady=(15, 15))
+        self.residence_label.grid(row=6, column=0, padx=30, pady=(15, 15), columnspan=2)
         self.residence_button_1 = ctk.CTkRadioButton(self.about_frame, variable=self.residence_type, value="Urban", text="Urban")
         self.residence_button_1.grid(row=7, column=0, pady=10, padx=20, sticky="w")
         self.residence_button_2 = ctk.CTkRadioButton(self.about_frame, variable=self.residence_type, value="Rural", text="Rural")
         self.residence_button_2.grid(row=8, column=0, pady=10, padx=20, sticky="w")
         self.residence_button_1.invoke()
 
-
-        self.next_button = ctk.CTkButton(self.about_frame, text="Next", command=self.Q4_Status, width=400, height=40, bg_color='blue')
-        self.next_button.grid(row=9, column=0, padx=30, pady=(15, 15))
+        self.previous_button = ctk.CTkButton(self.about_frame, text="Previous", command=lambda:self.previous(self.about_frame, self.Q2_Self), width=200, height=40,       bg_color='blue')
+        self.previous_button.grid(row=9, column=0, padx=15, pady=(15, 15))
+        self.next_button = ctk.CTkButton(self.about_frame, text="Next", command=self.Q4_Status, width=200, height=40, bg_color='blue')
+        self.next_button.grid(row=9, column=1, padx=15, pady=(15, 15))
 
         self.id_error_label = ctk.CTkLabel(self.about_frame, text="", font=ctk.CTkFont(size=15), text_color='red')
         self.id_error_label.grid(row=10, column=0, padx=30, pady=(15, 15))
@@ -170,7 +173,7 @@ class App(ctk.CTk):
         self.status_frame.grid(row=0, column=0, sticky="ns")
 
         self.hypertension_label = ctk.CTkLabel(self.status_frame, text="Do you have hypertension?", font=ctk.CTkFont(size=20, weight="bold"))
-        self.hypertension_label.grid(row=1, column=0, padx=30, pady=(100, 15))
+        self.hypertension_label.grid(row=1, column=0, padx=30, pady=(100, 15), columnspan=2)
         self.hypertension = tkinter.StringVar()
         self.hypertension_button_1 = ctk.CTkRadioButton(self.status_frame, variable=self.hypertension, value="Yes", text="Yes")
         self.hypertension_button_1.grid(row=2, column=0, pady=10, padx=20, sticky="w")
@@ -178,27 +181,26 @@ class App(ctk.CTk):
         self.hypertension_button_2.grid(row=3, column=0, pady=10, padx=20, sticky="w")
         self.hypertension_button_1.invoke()
 
-
         self.heart_disease = tkinter.StringVar()
         self.heart_disease_label = ctk.CTkLabel(self.status_frame, text="Do you have heart disease?", font=ctk.CTkFont(size=20, weight="bold"))
-        self.heart_disease_label.grid(row=4, column=0, padx=30, pady=(15, 15))
+        self.heart_disease_label.grid(row=4, column=0, padx=30, pady=(15, 15), columnspan=2)
         self.heart_disease_button_1 = ctk.CTkRadioButton(self.status_frame, variable=self.heart_disease, value="Yes", text="Yes")
         self.heart_disease_button_1.grid(row=5, column=0, pady=10, padx=20, sticky="w")
         self.heart_disease_button_2 = ctk.CTkRadioButton(self.status_frame, variable=self.heart_disease, value="No", text="No")
         self.heart_disease_button_2.grid(row=6, column=0, pady=10, padx=20, sticky="w")
-        self.heart_disease_button_2.invoke()
-
+        self.heart_disease_button_1.invoke()
 
         self.smoking_status = tkinter.StringVar()
         self.smoke_label = ctk.CTkLabel(self.status_frame, text="What is your smoking status?", font=ctk.CTkFont(size=20, weight="bold"))
-        self.smoke_label.grid(row=7, column=0, padx=30, pady=(15, 15))
+        self.smoke_label.grid(row=7, column=0, padx=30, pady=(15, 15), columnspan=2)
         self.smoke_menu = ctk.CTkOptionMenu(self.status_frame, values=["Smokes", "Never smoked", "Formerly smoked"], variable=self.smoking_status)
-        self.smoke_menu.set("Never smoked")
-        self.smoke_menu.grid(row=8, column=0, padx=30, pady=(15, 15))
+        self.smoke_menu.set("Smokes")
+        self.smoke_menu.grid(row=8, column=0, padx=30, pady=(15, 15), columnspan=2)
 
-
-        self.next_button = ctk.CTkButton(self.status_frame, text="Next", command=self.Q5_Body, width=400, height=40, bg_color='blue')
-        self.next_button.grid(row=9, column=0, padx=30, pady=(15, 15))
+        self.previous_button = ctk.CTkButton(self.status_frame, text="Previous", command=lambda:self.previous(self.status_frame, self.Q3_About), width=200, height=40,       bg_color='blue')
+        self.previous_button.grid(row=9, column=0, padx=15, pady=(15, 15))
+        self.next_button = ctk.CTkButton(self.status_frame, text="Next", command=self.Q5_Body, width=200, height=40, bg_color='blue')
+        self.next_button.grid(row=9, column=1, padx=15, pady=(15, 15))
 
         self.id_error_label = ctk.CTkLabel(self.status_frame, text="", font=ctk.CTkFont(size=15), text_color='red')
         self.id_error_label.grid(row=10, column=0, padx=30, pady=(15, 15))
@@ -216,26 +218,28 @@ class App(ctk.CTk):
         self.body_frame = ctk.CTkFrame(self, corner_radius=0, fg_color="transparent")
         self.body_frame.grid(row=0, column=0, sticky="ns")
 
-        self.heart_label = ctk.CTkLabel(self.body_frame, text="What is your height?", font=ctk.CTkFont(size=20, weight="bold"))
-        self.heart_label.grid(row=1, column=0, padx=30, pady=(100, 15))
+        self.height_label = ctk.CTkLabel(self.body_frame, text="What is your height?", font=ctk.CTkFont(size=20, weight="bold"))
+        self.height_label.grid(row=1, column=0, padx=30, pady=(100, 15), columnspan=2)
         self.height_value_label = ctk.CTkLabel(self.body_frame, text="3 ft 0 inches", font=ctk.CTkFont(size=10, weight="bold"))
-        self.height_value_label.grid(row=2, column=0, padx=30, pady=(15, 0))
+        self.height_value_label.grid(row=2, column=0, padx=30, pady=(15, 0), columnspan=2)
         self.height = tkinter.IntVar()
         self.height.set(36)
         self.height_scale = ctk.CTkSlider(self.body_frame, from_=36, to=95, orientation='horizontal', width=350, variable=self.height, command=showHeight)
-        self.height_scale.grid(row=3, column=0, padx=30, pady=(0, 30))
+        self.height_scale.grid(row=3, column=0, padx=30, pady=(0, 30), columnspan=2)
 
         self.weight_label = ctk.CTkLabel(self.body_frame, text="What is your weight?", font=ctk.CTkFont(size=20, weight="bold"))
-        self.weight_label.grid(row=4, column=0, padx=30, pady=(15, 15))
+        self.weight_label.grid(row=4, column=0, padx=30, pady=(15, 15), columnspan=2)
         self.weight_value_label = ctk.CTkLabel(self.body_frame, text="50 lbs", font=ctk.CTkFont(size=10, weight="bold"))
-        self.weight_value_label.grid(row=5, column=0, padx=30, pady=(15, 0))
+        self.weight_value_label.grid(row=5, column=0, padx=30, pady=(15, 0), columnspan=2)
         self.weight =  tkinter.IntVar()
         self.weight.set(50)
         self.weight_scale = ctk.CTkSlider(self.body_frame, from_=50, to=500, orientation='horizontal', width=350, variable=self.weight, command=showWeight)
-        self.weight_scale.grid(row=6, column=0, padx=30, pady=(0, 15))
+        self.weight_scale.grid(row=6, column=0, padx=30, pady=(0, 15), columnspan=2)
 
-        self.next_button = ctk.CTkButton(self.body_frame, text="Next", command=self.Q6_Glucose, width=400, height=40, bg_color='blue')
-        self.next_button.grid(row=7, column=0, padx=30, pady=(15, 15))
+        self.previous_button = ctk.CTkButton(self.body_frame, text="Previous", command=lambda:self.previous(self.body_frame, self.Q4_Status), width=200, height=40,       bg_color='blue')
+        self.previous_button.grid(row=7, column=0, padx=15, pady=(15, 15))
+        self.next_button = ctk.CTkButton(self.body_frame, text="Next", command=self.Q6_Glucose, width=200, height=40, bg_color='blue')
+        self.next_button.grid(row=7, column=1, padx=15, pady=(15, 15))
 
         self.id_error_label = ctk.CTkLabel(self.body_frame, text="", font=ctk.CTkFont(size=15), text_color='red')
         self.id_error_label.grid(row=8, column=0, padx=30, pady=(15, 15))
@@ -253,19 +257,22 @@ class App(ctk.CTk):
         self.glucose_frame.grid(row=0, column=0, sticky="ns")
         
         self.glucose_label = ctk.CTkLabel(self.glucose_frame, text="What is your glucose level?\n(Can skip if unknown)", font=ctk.CTkFont(size=20, weight="bold"))
-        self.glucose_label.grid(row=1, column=0, padx=30, pady=(100, 15))
+        self.glucose_label.grid(row=1, column=0, padx=30, pady=(100, 15), columnspan=2)
         self.glucose_value_label = ctk.CTkLabel(self.glucose_frame, text="50 mg/dL", font=ctk.CTkFont(size=10, weight="bold"))
         self.glucose_value_label.grid(row=2, column=0, padx=30, pady=(15, 0))
         self.glucose = tkinter.IntVar()
         self.glucose.set(50)
         self.glucose_scale = ctk.CTkSlider(self.glucose_frame, from_=50, to=275, orientation='horizontal', width=350, variable=self.glucose, command=showGlucose)
-        self.glucose_scale.grid(row=3, column=0, padx=30, pady=(0, 30))
+        self.glucose_scale.grid(row=3, column=0, padx=30, pady=(0, 30), columnspan=2)
 
         self.skip = False
-        self.next_button = ctk.CTkButton(self.glucose_frame, text="Skip", command=skipQuestion, width=400, height=40, fg_color='gray')
-        self.next_button.grid(row=4, column=0, padx=30, pady=(15, 15))
-        self.skip_button = ctk.CTkButton(self.glucose_frame, text="Next", command=self.results, width=400, height=40, bg_color='blue')
-        self.skip_button.grid(row=5, column=0, padx=30, pady=(15, 15))
+        self.skip_button = ctk.CTkButton(self.glucose_frame, text="Skip", command=skipQuestion, width=200, height=40, fg_color='gray')
+        self.skip_button.grid(row=4, column=0, padx=30, pady=(15, 15), columnspan=2)
+
+        self.previous_button = ctk.CTkButton(self.glucose_frame, text="Previous", command=lambda:self.previous(self.glucose_frame, self.Q5_Body), width=200, height=40,       bg_color='blue')
+        self.previous_button.grid(row=5, column=0, padx=15, pady=(15, 15))
+        self.next_button = ctk.CTkButton(self.glucose_frame, text="Next", command=self.results, width=200, height=40, bg_color='blue')
+        self.next_button.grid(row=5, column=1, padx=15, pady=(15, 15))
 
         self.id_error_label = ctk.CTkLabel(self.glucose_frame, text="", font=ctk.CTkFont(size=15), text_color='red')
         self.id_error_label.grid(row=6, column=0, padx=30, pady=(15, 15))
@@ -338,6 +345,11 @@ class App(ctk.CTk):
     def back_event(self):
         self.main_frame.grid_forget()  # remove main frame
         self.start_frame.grid(row=0, column=0, sticky="ns")  # show login frame
+    
+    def previous(self, current_frame, previous_question):
+        # Erase current frame and go to previous_frame
+        current_frame.grid_forget()
+        previous_question()
 
 
 if __name__ == "__main__":
