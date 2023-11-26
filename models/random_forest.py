@@ -18,12 +18,11 @@ X_test = test_data.drop('stroke', axis=1)
 y_test = test_data['stroke']
 
 # Train model using parameters optimized from gridsearch
-model = RandomForestClassifier(n_estimators=100, max_depth=3, min_samples_leaf=10)
-
+# model = RandomForestClassifier()
 # parameters = {
 #     'n_estimators':[100,110,120,130,140,150],
 #     'criterion':['gini', 'entropy', 'log_loss'],
-#     'min_samples_split':[2,5,7,10],
+#     'min_samples_split':[1,2,5,7,10],
 #     'min_samples_leaf':[1,2,5,10,20]
 # }
 # grid = GridSearchCV(model, param_grid=parameters, cv=10, n_jobs=-1, verbose=1)
@@ -31,10 +30,15 @@ model = RandomForestClassifier(n_estimators=100, max_depth=3, min_samples_leaf=1
 # print(grid.best_score_)
 # print(grid.best_params_)
 
-# model = RandomForestClassifier(n_estimators=100, criterion='log_loss', min_samples_leaf=2, min_samples_split=10)
+model = RandomForestClassifier(n_estimators=100, criterion='entropy', min_samples_leaf=1, min_samples_split=5)
 model.fit(X_train, y_train)
 print(model.score(X_train, y_train))
 print(model.score(X_test, y_test))
+
+# model = RandomForestClassifier(n_estimators=140, criterion='gini', min_samples_leaf=1, min_samples_split=5)
+# model.fit(X_train, y_train)
+# print(model.score(X_train, y_train))
+# print(model.score(X_test, y_test))
 
 # y_prediction = model.predict(X_test)
 # # Accuracy statistics
