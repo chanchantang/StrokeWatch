@@ -31,7 +31,7 @@ class App(ctk.CTk):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.title("CustomTkinter example_background_image.py")
+        self.title("Stroke assessment")
         self.geometry(f"{self.width}x{self.height}")
         self.resizable(False, False)
 
@@ -48,17 +48,22 @@ class App(ctk.CTk):
     def start_page(self):
         self.start_frame = ctk.CTkFrame(self, corner_radius=0, fg_color="transparent")
         self.start_frame.grid(row=0, column=0, sticky="ns")
-        self.start_label = ctk.CTkLabel(self.start_frame, text="Are you ready to learn\nyour stroke risk?",
-                                                  font=ctk.CTkFont(size=30, weight="bold"))
+        self.start_label = ctk.CTkLabel(self.start_frame, text="Are you ready to learn\nyour stroke risk?", font=ctk.CTkFont(size=30, weight="bold"))
         self.start_label.grid(row=0, column=0, padx=30, pady=(150, 15))
+
         self.start_label = ctk.CTkLabel(self.start_frame, text="Disclaimer: This assessment is in no way a medical assessment.\n Please seek a medical profession for a proper evaluation", font=ctk.CTkFont(size=15), text_color='gray')
-        self.start_label.grid(row=1, column=0, padx=30, pady=(15, 15))
+        self.start_label.grid(row=2, column=0, padx=30, pady=(50, 15))
+
         self.start_checkbox = ctk.CTkCheckBox(self.start_frame, text="I have read, understood and agree to the above")
-        self.start_checkbox.grid(row=2, column=0, padx=50, pady=(100, 0), sticky="w")
+        self.start_checkbox.grid(row=3, column=0, padx=50, pady=(50, 0), sticky="w")
+
         self.login_button = ctk.CTkButton(self.start_frame, text="Start", command=self.Q1_Identity, width=400, height=40,       bg_color='blue')
-        self.login_button.grid(row=3, column=0, padx=30, pady=(15, 15))
+        self.login_button.grid(row=4, column=0, padx=30, pady=(15, 15))
+
+        self.group_label = ctk.CTkLabel(self.start_frame, text="Created by: Jeanna Liebe, Rheana Lopez, Luna Sang,\n\t Chanson Tang, and Samuel Wong", font=ctk.CTkFont(size=15), text_color='white', anchor='w', justify='left')
+        self.group_label.grid(row=5, column=0, padx=30, pady=(15, 15))
         self.error_label = ctk.CTkLabel(self.start_frame, text="", font=ctk.CTkFont(size=15), text_color='red')
-        self.error_label.grid(row=4, column=0, padx=30, pady=(15, 15))
+        self.error_label.grid(row=6, column=0, padx=30, pady=(15, 15))
 
     def name_event(self):
         # print("Login pressed - username:", self.username_entry.get(), "password:", self.password_entry.get())
@@ -319,27 +324,31 @@ class App(ctk.CTk):
         test_data = pd.read_csv(test)
         print(test_data)
 
+        # Load model to predict
         model = joblib.load('./saved_models/random_forest.joblib')
         output = model.predict(test_data)
         print(output)
 
+        self.glucose_frame.grid_forget()
         self.result_frame = ctk.CTkFrame(self, corner_radius=0, fg_color="transparent")
         self.result_frame.grid(row=0, column=0, sticky="ns")
-        self.result_label = ctk.CTkLabel(self.start_frame, text="Here are your results",
-                                                  font=ctk.CTkFont(size=30, weight="bold"))
-        self.result_label.grid(row=0, column=0, padx=30, pady=(150, 15))
-        self.result_label = ctk.CTkLabel(self.result_frame, text="Disclaimer: This assessment is in no way a medical assessment.\n Please seek a medical profession for a proper evaluation", font=ctk.CTkFont(size=15), text_color='gray')
-        self.result_label.grid(row=1, column=0, padx=30, pady=(15, 15))
-        self.login_button = ctk.CTkButton(self.result_frame, text="Start", command="", width=400, height=40,       bg_color='blue')
 
-        self.login_button.grid(row=3, column=0, padx=30, pady=(15, 15))
+        self.result_title_label = ctk.CTkLabel(self.result_frame, text="Here are your results", font=ctk.CTkFont(size=30, weight="bold"))
+        self.result_title_label.grid(row=1, column=0, padx=30, pady=(150, 15))
+
+        self.result_label = ctk.CTkLabel(self.result_frame, text="", font=ctk.CTkFont(size=15, weight="bold"))
+        self.result_label.grid(row=2, column=0, padx=30, pady=(15, 15))
+
+        self.again_button = ctk.CTkButton(self.result_frame, text="Restart", command=lambda:self.previous(self.result_frame, self.start_page), width=400, height=40,       bg_color='blue')
+        self.again_button.grid(row=3, column=0, padx=30, pady=(15, 15))
+
         self.error_label = ctk.CTkLabel(self.result_frame, text="", font=ctk.CTkFont(size=15), text_color='red')
         self.error_label.grid(row=4, column=0, padx=30, pady=(15, 15))
 
         if output:
-            self.error_label.configure(text="Hurray, you have a stroke!")
+            self.result_label.configure(text="Hurray, you have a stroke!")
         else:
-            self.error_label.configure(text="Unfortunately, you do not have a stroke")
+            self.result_label.configure(text="Unfortunately, you do not have a stroke")
 
 
     def back_event(self):
