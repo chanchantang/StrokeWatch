@@ -10,7 +10,7 @@ import pandas as pd
 ctk.set_appearance_mode("dark")
 
 user_input={
-	'sex': None,
+	'gender': None,
 	'age': None,
 	'hypertension' : None,
 	'heart_disease' : None,
@@ -20,6 +20,14 @@ user_input={
 	'avg_glucose_level' : None,
 	'bmi' : None,
 	'smoking_status' : None
+}
+
+categorical = {
+    'gender': ['Male', 'Female', 'Other'],
+    'ever_married': ['Yes', 'No'],
+    'work_type': ['Private','Self-employed','Govt_job', 'children', 'Never_worked'],
+    'Residence_type': ['Urban','Rural'],
+    'smoking_status': ['formerly smoked', 'never smoked', 'smokes', 'Unknown']
 }
 
 AVG_GLUCOSE = 105.3
@@ -123,6 +131,7 @@ class App(ctk.CTk):
         self.age_value_label = ctk.CTkLabel(self.self_frame, text="1", font=ctk.CTkFont(size=15, weight="bold"))
         self.age_value_label.grid(row=6, column=0, padx=30, pady=(15, 0), columnspan=2)
         self.age = ctk.IntVar()
+        self.age.set(1)
         self.age_scale = ctk.CTkSlider(self.self_frame, from_=1, to=110, orientation='horizontal', width=350, variable=self.age, command=showAge)
         self.age_scale.grid(row=7, column=0, padx= 30, pady=(15, 15), columnspan=2)
 
@@ -141,14 +150,16 @@ class App(ctk.CTk):
 
         self.married_label = ctk.CTkLabel(self.about_frame, text="Have you ever been married?", font=ctk.CTkFont(size=20, weight="bold"))
         self.married_label.grid(row=1, column=0, padx=30, pady=(100, 15), columnspan=2)
-        self.ever_married = tkinter.StringVar()
-        self.married_button_1 = ctk.CTkRadioButton(self.about_frame, variable=self.ever_married, value="Yes", text="Yes")
+        self.ever_married = tkinter.IntVar()
+        self.ever_married.set(1)
+        self.married_button_1 = ctk.CTkRadioButton(self.about_frame, variable=self.ever_married, value=1, text="Yes")
         self.married_button_1.grid(row=2, column=0, pady=10, padx=20, sticky="w")
-        self.married_button_2 = ctk.CTkRadioButton(self.about_frame, variable=self.ever_married, value="No", text="No")
+        self.married_button_2 = ctk.CTkRadioButton(self.about_frame, variable=self.ever_married, value=0, text="No")
         self.married_button_2.grid(row=3, column=0, pady=10, padx=20, sticky="w")
         self.married_button_1.invoke()
 
         self.work_type = tkinter.StringVar()
+        self.work_type.set('Self-employed')
         self.work_label = ctk.CTkLabel(self.about_frame, text="What is your work type?", font=ctk.CTkFont(size=20, weight="bold"))
         self.work_label.grid(row=4, column=0, padx=30, pady=(15, 15), columnspan=2)
         self.work_menu = ctk.CTkOptionMenu(self.about_frame, values=["Self-employed", "Children", "Government job", "Private", "Never worked"], variable=self.work_type)
@@ -156,6 +167,7 @@ class App(ctk.CTk):
         self.work_menu.grid(row=5, column=0, padx=30, pady=(15, 15), columnspan=2)
 
         self.residence_type = tkinter.StringVar()
+        self.residence_type.set('Urban')
         self.residence_label = ctk.CTkLabel(self.about_frame, text="What is your residence type?", font=ctk.CTkFont(size=20, weight="bold"))
         self.residence_label.grid(row=6, column=0, padx=30, pady=(15, 15), columnspan=2)
         self.residence_button_1 = ctk.CTkRadioButton(self.about_frame, variable=self.residence_type, value="Urban", text="Urban")
@@ -179,25 +191,28 @@ class App(ctk.CTk):
 
         self.hypertension_label = ctk.CTkLabel(self.status_frame, text="Do you have hypertension?", font=ctk.CTkFont(size=20, weight="bold"))
         self.hypertension_label.grid(row=1, column=0, padx=30, pady=(100, 15), columnspan=2)
-        self.hypertension = tkinter.StringVar()
-        self.hypertension_button_1 = ctk.CTkRadioButton(self.status_frame, variable=self.hypertension, value="Yes", text="Yes")
+        self.hypertension = tkinter.IntVar()
+        self.hypertension.set(1)
+        self.hypertension_button_1 = ctk.CTkRadioButton(self.status_frame, variable=self.hypertension, value=1, text="Yes")
         self.hypertension_button_1.grid(row=2, column=0, pady=10, padx=20, sticky="w")
-        self.hypertension_button_2 = ctk.CTkRadioButton(self.status_frame, variable=self.hypertension, value="No", text="No")
+        self.hypertension_button_2 = ctk.CTkRadioButton(self.status_frame, variable=self.hypertension, value=0, text="No")
         self.hypertension_button_2.grid(row=3, column=0, pady=10, padx=20, sticky="w")
         self.hypertension_button_1.invoke()
 
-        self.heart_disease = tkinter.StringVar()
         self.heart_disease_label = ctk.CTkLabel(self.status_frame, text="Do you have heart disease?", font=ctk.CTkFont(size=20, weight="bold"))
         self.heart_disease_label.grid(row=4, column=0, padx=30, pady=(15, 15), columnspan=2)
-        self.heart_disease_button_1 = ctk.CTkRadioButton(self.status_frame, variable=self.heart_disease, value="Yes", text="Yes")
+        self.heart_disease = tkinter.IntVar()
+        self.heart_disease.set(1)
+        self.heart_disease_button_1 = ctk.CTkRadioButton(self.status_frame, variable=self.heart_disease, value=1, text="Yes")
         self.heart_disease_button_1.grid(row=5, column=0, pady=10, padx=20, sticky="w")
-        self.heart_disease_button_2 = ctk.CTkRadioButton(self.status_frame, variable=self.heart_disease, value="No", text="No")
+        self.heart_disease_button_2 = ctk.CTkRadioButton(self.status_frame, variable=self.heart_disease, value=0, text="No")
         self.heart_disease_button_2.grid(row=6, column=0, pady=10, padx=20, sticky="w")
         self.heart_disease_button_1.invoke()
 
-        self.smoking_status = tkinter.StringVar()
         self.smoke_label = ctk.CTkLabel(self.status_frame, text="What is your smoking status?", font=ctk.CTkFont(size=20, weight="bold"))
         self.smoke_label.grid(row=7, column=0, padx=30, pady=(15, 15), columnspan=2)
+        self.smoking_status = tkinter.StringVar()
+        self.smoking_status.set('Smokes')
         self.smoke_menu = ctk.CTkOptionMenu(self.status_frame, values=["Smokes", "Never smoked", "Formerly smoked"], variable=self.smoking_status)
         self.smoke_menu.set("Smokes")
         self.smoke_menu.grid(row=8, column=0, padx=30, pady=(15, 15), columnspan=2)
@@ -283,20 +298,8 @@ class App(ctk.CTk):
         self.id_error_label.grid(row=6, column=0, padx=30, pady=(15, 15))
 
     def results(self):
-        if self.skip:
-            user_input["avg_glucose_level"] = AVG_GLUCOSE
-        else:
-            user_input["avg_glucose_level"] = self.glucose.get()
-
-        #user_input["sex"] = self.sex.get()
-        #user_input["age"] = self.age.get()
-        #user_input["hypertension"] = self.hypertension.get()
-        #user_input["heart_disease"] = self.heart_disease.get()
-        #user_input["ever_married"] = self.ever_married.get()
-        #user_input["work_type"] = self.work_type.get()
-        #user_input["residence_type"] = self.residence_type.get()
-        #user_input["bmi"] = round((self.weight.get()/2.20462)/((self.height.get() * 0.0254)**2), 1)
-        #user_input["smoking_status"] = self.smoking_status.get()
+        
+        input = self.get_input()
         #print(user_input)
 
         # user_input={
@@ -359,7 +362,49 @@ class App(ctk.CTk):
         # Erase current frame and go to previous_frame
         current_frame.grid_forget()
         previous_question()
+    
+    # To-do: need to check against columns from new preprocessing
+    def get_input(self):
+        if self.skip:
+            user_input["avg_glucose_level"] = AVG_GLUCOSE
+        else:
+            user_input["avg_glucose_level"] = float(self.glucose.get())
 
+        user_input["gender"] = self.sex.get()
+        user_input["age"] = self.age.get()
+        user_input["hypertension"] = self.hypertension.get()
+        user_input["heart_disease"] = self.heart_disease.get()
+        user_input["ever_married"] = self.ever_married.get()
+        user_input["work_type"] = self.work_type.get()
+        user_input["Residence_type"] = self.residence_type.get()
+        user_input["bmi"] = round((self.weight.get()/2.20462)/((self.height.get() * 0.0254)**2), 1)
+        user_input["smoking_status"] = self.smoking_status.get()
+
+        TEST_DATA_PATH = "../raw_data/test_data.csv"
+        test_data = pd.read_csv(TEST_DATA_PATH)
+        new_data = test_data[0:0]
+        new_data = new_data.drop('stroke', axis=1)
+        new_data = pd.concat([new_data, pd.Series()], ignore_index=True)
+
+        # Fill in numerical
+        new_data.at[0, 'age'] = user_input['age']
+        new_data.at[0, 'hypertension'] = user_input['hypertension']
+        new_data.at[0, 'heart_disease'] = user_input['heart_disease']
+        new_data.at[0, 'ever_married'] = user_input['ever_married']
+        new_data.at[0, 'bmi'] = user_input['bmi']
+        new_data.at[0, 'avg_glucose_level'] = user_input['avg_glucose_level']
+
+        # Fill in categorical dummy columns
+        for col in new_data:
+            for category in categorical:
+                for value in categorical[category]:
+                    if category + "_" + value == col:
+                        if user_input[category] == value:
+                            new_data.at[0, category + "_" + value] = True
+                        else:
+                            new_data.at[0, category + "_" + value] = False
+
+        print(new_data.iloc[[0]])
 
 if __name__ == "__main__":
     app = App()
