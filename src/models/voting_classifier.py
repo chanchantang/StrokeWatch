@@ -19,8 +19,8 @@ from joblib import dump
 
 
 # import pre-processed data
-train_data_path = "../../raw_data/train_data.csv"
-test_data_path  = "../../raw_data/test_data.csv"
+train_data_path = "../raw_data/train_data.csv"
+test_data_path  = "../raw_data/test_data.csv"
 train_data = pd.read_csv(train_data_path)
 test_data  = pd.read_csv(test_data_path)
 
