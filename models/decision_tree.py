@@ -12,8 +12,8 @@ train_data = pd.read_csv(train_data_path)
 test_data  = pd.read_csv(test_data_path)
 
 # Unnamed column in prepocessed data? Removing for now
-train_data = train_data.drop(columns=train_data.columns[0], axis=1)
-test_data = test_data.drop(columns=test_data.columns[0], axis=1)
+# train_data = train_data.drop(columns=train_data.columns[0], axis=1)
+# test_data = test_data.drop(columns=test_data.columns[0], axis=1)
 
 # Split into train and test sets
 X_train = train_data.drop('stroke', axis = 1)
@@ -32,7 +32,28 @@ report = classification_report(y_test, y_prediction)
 cm = confusion_matrix(y_test, y_prediction)
 parameters = clf.get_params()
 feature_importance = pd.DataFrame(clf.feature_importances_, index = X_train.columns)
-print(accuracy)
+
+# Print the results
+print(f'Accuracy: {round(accuracy*100, ndigits = 2)}%')
+print(f'Confusion Matrix:\n{cm}')
+print(f'Classification Report:\n{report}')
+
+""" Results of the above print statements:
+Accuracy: 91.45%
+Confusion Matrix:
+[[893  47]
+ [ 37   5]]
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.96      0.95      0.96       940
+           1       0.10      0.12      0.11        42
+
+    accuracy                           0.91       982
+   macro avg       0.53      0.53      0.53       982
+weighted avg       0.92      0.91      0.92       982
+"""
+
 
 # Use gridsearch to tune hyperparameters
 '''

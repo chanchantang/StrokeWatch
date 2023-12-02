@@ -48,22 +48,23 @@ log_reg_accuracy = accuracy_score(y_test, y_prediction)
 log_reg_confusion_matrix = confusion_matrix(y_test, y_prediction)
 log_reg_classification_report = classification_report(y_test, y_prediction)
 
-print('Accuracy: ', log_reg_accuracy)
+print(f'Accuracy: {round(log_reg_accuracy*100, ndigits = 2)}%')
 print('Classification Report:\n', log_reg_classification_report)
 print('Confusion Matrix:\n', log_reg_confusion_matrix)
 
 """ Results of the above print statements:
-Accuracy:  0.7311608961303462
+Accuracy:  93.99%
 Classification Report:
                precision    recall  f1-score   support
 
-           0       0.94      0.76      0.84       940
-           1       0.00      0.00      0.00        42
+           0       0.96      0.97      0.97       940
+           1       0.23      0.17      0.19        42
 
-    accuracy                           0.73       982
-   macro avg       0.47      0.38      0.42       982
-weighted avg       0.90      0.73      0.81       982
+    accuracy                           0.94       982
+   macro avg       0.59      0.57      0.58       982
+weighted avg       0.93      0.94      0.94       982
+
 Confusion Matrix:
- [[718 222]
- [ 42   0]]
+ [[916  24]
+ [ 35   7]]
 """

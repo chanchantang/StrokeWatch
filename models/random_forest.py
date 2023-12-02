@@ -49,6 +49,34 @@ print(model.score(X_test, y_test))
 # feature_importance = pd.DataFrame(model.feature_importances_, index=X_train.columns)
 # print(accuracy)
 
+# Make predictions on the test set
+y_pred = model.predict(X_test)
+
+# Evaluate the model
+accuracy = accuracy_score(y_test, y_pred)
+conf_matrix = confusion_matrix(y_test, y_pred)
+class_report = classification_report(y_test, y_pred)
+
+# Print the results
+print(f'Accuracy: {round(accuracy*100, ndigits = 2)}%')
+print(f'Confusion Matrix:\n{conf_matrix}')
+print(f'Classification Report:\n{class_report}')
+
+""" Results of the above print statements:
+Accuracy: 95.01%
+Confusion Matrix:
+[[933   7]
+ [ 42   0]]
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.96      0.99      0.97       940
+           1       0.00      0.00      0.00        42
+
+    accuracy                           0.95       982
+   macro avg       0.48      0.50      0.49       982
+weighted avg       0.92      0.95      0.93       982
+"""
 
 
 
