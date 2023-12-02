@@ -6,8 +6,8 @@ from sklearn. metrics import accuracy_score, classification_report, confusion_ma
 from joblib import dump, load
 
 # Import preprocessed data
-train_data_path = '../../raw_data/train_data.csv'
-test_data_path = '../../raw_data/test_data.csv'
+train_data_path = '../raw_data/train_data.csv'
+test_data_path = '../raw_data/test_data.csv'
 train_data = pd.read_csv(train_data_path)
 test_data  = pd.read_csv(test_data_path)
 
