@@ -70,4 +70,4 @@ Confusion Matrix:
  [ 35   7]]
 """
 # Save model
-#dump(log_reg_model, '../../saved_models/' + 'logistic_regression' + '.joblib')
+dump(log_reg_model, '../saved_models/' + 'logistic_regression' + '.joblib')

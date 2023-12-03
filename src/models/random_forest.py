@@ -5,11 +5,19 @@ from sklearn.model_selection import GridSearchCV
 from sklearn. metrics import accuracy_score, classification_report, confusion_matrix, ConfusionMatrixDisplay
 from joblib import dump, load
 
+
 # Import preprocessed data
 train_data_path = '../raw_data/train_data.csv'
 test_data_path = '../raw_data/test_data.csv'
 train_data = pd.read_csv(train_data_path)
 test_data  = pd.read_csv(test_data_path)
+
+# from sklearn.model_selection import train_test_split
+# df_cleaned = pd.read_csv("../raw_data/cleaned_data.csv")
+# X = df_cleaned[df_cleaned.columns.difference(['stroke'])]
+# y = df_cleaned['stroke']
+
+# X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, stratify=y, random_state=340)
 
 # Split into train and test sets
 X_train = train_data.drop('stroke', axis=1)
@@ -17,37 +25,33 @@ y_train = train_data['stroke']
 X_test = test_data.drop('stroke', axis=1)
 y_test = test_data['stroke']
 
+# print("counts of label '1': {}".format(sum(y_train == 1)))
+# print("counts of label '0': {}".format(sum(y_train == 0)))
+
+# X = train_data.drop(train_data[train_data.stroke == 0].index)
+# X_train = X.drop('stroke', axis=1)
+# y_train = X['stroke']
+
 # Train model using parameters optimized from gridsearch
-# model = RandomForestClassifier()
+# model = RandomForestClassifier(random_state=340)
 # parameters = {
-#     'n_estimators':[100,110,120,130,140,150],
-#     'criterion':['gini', 'entropy', 'log_loss'],
-#     'min_samples_split':[1,2,5,7,10],
-#     'min_samples_leaf':[1,2,5,10,20]
+#    'n_estimators':[100,110,120,130,140,150],
+#    'criterion':['gini', 'entropy', 'log_loss'],
+#    'min_samples_split':[1,2,5,7,10],
+#    'min_samples_leaf':[1,2,5,10,20],
+#    'random_state': [340,24]
+
 # }
 # grid = GridSearchCV(model, param_grid=parameters, cv=10, n_jobs=-1, verbose=1)
 # grid.fit(X_train, y_train)
 # print(grid.best_score_)
 # print(grid.best_params_)
 
-model = RandomForestClassifier(n_estimators=100, criterion='entropy', min_samples_leaf=1, min_samples_split=5)
+model = RandomForestClassifier(n_estimators=100, criterion='gini', min_samples_leaf=1, min_samples_split=2, random_state=340)
+# model = RandomForestClassifier(random_state=340)
 model.fit(X_train, y_train)
-print(model.score(X_train, y_train))
-print(model.score(X_test, y_test))
-
-# model = RandomForestClassifier(n_estimators=140, criterion='gini', min_samples_leaf=1, min_samples_split=5)
-# model.fit(X_train, y_train)
 # print(model.score(X_train, y_train))
 # print(model.score(X_test, y_test))
-
-# y_prediction = model.predict(X_test)
-# # Accuracy statistics
-# accuracy = accuracy_score(y_test, y_prediction)
-# report = classification_report(y_test, y_prediction)
-# cm = confusion_matrix(y_test, y_prediction)
-# parameters = model.get_params()
-# feature_importance = pd.DataFrame(model.feature_importances_, index=X_train.columns)
-# print(accuracy)
 
 # Make predictions on the test set
 y_pred = model.predict(X_test)
@@ -78,14 +82,6 @@ Classification Report:
 weighted avg       0.92      0.95      0.93       982
 """
 
-
-
-
-
-# To save/load model 
-# dump(model, '../../saved_models/' + 'random_forest' + '.joblib')
-# loaded_clf = load('../saved_models/' + 'decision_tree.' + 'joblib')
-
 #### Use in .ipynb for stats below to extract graphs ###
 
 # Plot confusion matrix
@@ -98,5 +94,5 @@ weighted avg       0.92      0.95      0.93       982
 # plot_tree(clf, feature_names=X_train.columns, class_names={0:'Negative', 1:'Stroke'},  max_depth=3, filled=True)
 
 # To save/load model 
-# dump(clf, '../saved_models/' + 'decision_tree' + '.joblib')
+dump(model, '../saved_models/' + 'decision_tree' + '.joblib')
 # loaded_clf = load('../saved_models/' + 'decision_tree.' + 'joblib')

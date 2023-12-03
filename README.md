@@ -1,12 +1,15 @@
+# Stroke Susceptibility Prediction
 # SFU CMPT 340 Project Template -- Replace with project title
 This repository is a template for your CMPT 340 course project.
 Replace the title with your project title, and **add a snappy acronym that people remember (mnemonic)**.
 
 Add a 1-2 line summary of your project here.
 
+The Stroke Susceptibility Prediction app employs various machine learning models, such as random forest and logistic regression, to analyze individual health data and provide personalized risk assessments for stroke occurrence based on factors like age, medical history, and lifestyle.
+
 ## Important Links
 
-| [Timesheet](https://google.com) | [Slack channel](https://google.com) | [Project report](https://google.com) |
+| [Timesheet](https://1sfu-my.sharepoint.com/:x:/g/personal/kabhishe_sfu_ca/ERc0Vdpa4d9JsOf2QhltWxoBg9t34Slpekk71h27oCd2Yw?e=xaOhcR) | [Slack channel](https://app.slack.com/client/T05JYJAF22G/C05TGPB8D1A/docs/Qp:F05TE8BJEMR/1701591119214) | [Project report](https://www.overleaf.com/project/650c9edaf58339ecbee4649d) |
 |-----------|---------------|-------------------------|
 
 
@@ -32,6 +35,8 @@ Record a short video (1:40 - 2 minutes maximum) or gif or a simple screen record
 <a name="demo"></a>
 ## 1. Example demo
 
+// TODO: should this be the stats or the app?
+
 A minimal example to showcase your work
 
 ```python
@@ -48,10 +53,13 @@ Explain briefly what files are found where
 ```bash
 repository
 ├── src                          ## source code of the package itself
-├── scripts                      ## scripts, if needed
-├── docs                         ## If needed, documentation   
+│   └── models                   ## model and stat creation
+├── raw_data                     ## data imported and created
+├── raw_data_old                 ## data imported and created using old encoding
+├── saved_models                 ## machine learning models
+├── saved_models_old             ## machine learning models using old preprocessing
 ├── README.md                    ## You are here
-├── requirements.yml             ## If you use conda
+├── requirements.txt             ## requirements
 ```
 
 <a name="installation"></a>
@@ -64,8 +72,7 @@ Provide _exact_ versions, test on CSIL or reference workstations.
 ```bash
 git clone $THISREPO
 cd $THISREPO
-conda env create -f requirements.yml
-conda activate amazing
+pip install -r requirements.txt // TODO: update in the end with app
 ```
 
 <a name="repro"></a>
@@ -77,6 +84,11 @@ wget https://yourstorageisourbusiness.com/dataset.zip
 unzip dataset.zip
 conda activate amazing
 python evaluate.py --epochs=10 --data=/in/put/dir
+
+mkdir raw_data // maybe not needed
+cd src
+python src/run.py
+python src/stroke_application.py
 ```
 Data can be found at ...
 Output will be saved in ...

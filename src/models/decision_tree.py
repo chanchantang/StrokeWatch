@@ -71,10 +71,6 @@ print(grid.best_score_)
 print(grid.best_params_)
 '''
 
-# To save/load model 
-# dump(clf, '../../saved_models/' + 'decision_tree' + '.joblib')
-# loaded_clf = load('../saved_models/' + 'decision_tree.' + 'joblib')
-
 #### Use in .ipynb for stats below to extract graphs ###
 
 # Plot confusion matrix
@@ -86,6 +82,6 @@ print(grid.best_params_)
 # plt.figure(figsize = (80, 20))
 # plot_tree(clf, feature_names=X_train.columns, class_names={0:'Negative', 1:'Stroke'},  max_depth=3, filled=True)
 
-# To save/load model 
-# dump(clf, '../saved_models/' + 'decision_tree' + '.joblib')
+# To save/load model
+dump(clf, '../saved_models/' + 'decision_tree' + '.joblib')
 # loaded_clf = load('../saved_models/' + 'decision_tree.' + 'joblib')

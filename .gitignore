@@ -161,3 +161,4 @@ cython_debug/
 
 # Data files
 raw_data/
+raw_data_old/
