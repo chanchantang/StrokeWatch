@@ -270,7 +270,7 @@ class App(ctk.CTk):
         input = self.get_input()
 
         # Predict using model
-        model = joblib.load('../saved_models/random_forest.joblib')
+        model = joblib.load('../saved_models/logistic_regression.joblib')
         output = model.predict(input)
 
         self.glucose_frame.grid_forget()
