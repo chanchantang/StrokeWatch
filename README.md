@@ -1,7 +1,4 @@
-# Stroke Susceptibility Prediction
-# SFU CMPT 340 Project Template -- Replace with project title
-This repository is a template for your CMPT 340 course project.
-Replace the title with your project title, and **add a snappy acronym that people remember (mnemonic)**.
+# Stroke Susceptibility Prediction Using Five Machine Learning Models - StrokeWatch
 
 Add a 1-2 line summary of your project here.
 
