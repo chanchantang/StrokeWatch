@@ -91,8 +91,8 @@ weighted avg       0.91      0.75      0.82       982
 # accuracy scores
 score_hard = accuracy_score(y_test, y_pred_hard)
 score_soft = accuracy_score(y_test, y_pred_soft)
-# print("Hard Voting Accuracy Score % d" % score_hard)
-# print("Soft Voting Accuracy Score % d" % score_soft)
+print("Hard Voting Accuracy Score % d" % score_hard)
+print("Soft Voting Accuracy Score % d" % score_soft)
 
 '''
 Hard and Soft Voting Scores from above print statements:
@@ -104,8 +104,8 @@ Soft Voting Score  0
 # confusion matrices
 CM_hard = confusion_matrix(y_test, y_pred_hard)
 CM_soft = confusion_matrix(y_test, y_pred_soft)
-# print('Confusion Matrix for Hard Voting is : \n', CM_hard)
-# print('Confusion Matrix for Soft Voting is : \n', CM_soft)
+print('Confusion Matrix for Hard Voting is : \n', CM_hard)
+print('Confusion Matrix for Soft Voting is : \n', CM_soft)
 
 '''
 Confusion Matrix for Hard Voting is : 
@@ -130,5 +130,5 @@ Cross val scores from above print statement:
 '''
 
 # Save model
-#dump(eclf1, '../../saved_models/' + 'voting_classifier_hard' + '.joblib')
-#dump(eclf2, '../../saved_models/' + 'voting_classifier_soft' + '.joblib')
+dump(eclf1, '../saved_models/' + 'voting_classifier_hard' + '.joblib')
+dump(eclf2, '../saved_models/' + 'voting_classifier_soft' + '.joblib')

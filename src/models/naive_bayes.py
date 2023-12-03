@@ -52,4 +52,4 @@ weighted avg       0.94      0.73      0.81       982
 
 """
 # Export model
-#dump(naive_bayes_model, '../../saved_models/' + 'naive_bayes' + '.joblib')
+dump(naive_bayes_model, '../saved_models/' + 'naive_bayes' + '.joblib')
