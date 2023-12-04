@@ -49,7 +49,7 @@ class App(ctk.CTk):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.title("Stroke assessment")
+        self.title("StrokeWatch")
         self.geometry(f"{self.width}x{self.height}")
         self.resizable(False, False)
 
@@ -62,7 +62,6 @@ class App(ctk.CTk):
 
         self.start_page()
 
-#"Are you ready to learn\nyour stroke risk?"
     def start_page(self):
         # Start menu
         self.start_frame = ctk.CTkFrame(self, corner_radius=0, fg_color="transparent")
