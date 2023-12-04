@@ -5,19 +5,11 @@ from sklearn.model_selection import GridSearchCV
 from sklearn. metrics import accuracy_score, classification_report, confusion_matrix, ConfusionMatrixDisplay
 from joblib import dump, load
 
-
 # Import preprocessed data
 train_data_path = '../raw_data/train_data.csv'
 test_data_path = '../raw_data/test_data.csv'
 train_data = pd.read_csv(train_data_path)
 test_data  = pd.read_csv(test_data_path)
-
-# from sklearn.model_selection import train_test_split
-# df_cleaned = pd.read_csv("../raw_data/cleaned_data.csv")
-# X = df_cleaned[df_cleaned.columns.difference(['stroke'])]
-# y = df_cleaned['stroke']
-
-# X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, stratify=y, random_state=340)
 
 # Split into train and test sets
 X_train = train_data.drop('stroke', axis=1)
@@ -25,13 +17,7 @@ y_train = train_data['stroke']
 X_test = test_data.drop('stroke', axis=1)
 y_test = test_data['stroke']
 
-# print("counts of label '1': {}".format(sum(y_train == 1)))
-# print("counts of label '0': {}".format(sum(y_train == 0)))
-
-# X = train_data.drop(train_data[train_data.stroke == 0].index)
-# X_train = X.drop('stroke', axis=1)
-# y_train = X['stroke']
-
+{
 # Train model using parameters optimized from gridsearch
 # model = RandomForestClassifier(random_state=340)
 # parameters = {
@@ -46,12 +32,12 @@ y_test = test_data['stroke']
 # grid.fit(X_train, y_train)
 # print(grid.best_score_)
 # print(grid.best_params_)
+}
 
-model = RandomForestClassifier(n_estimators=100, criterion='gini', min_samples_leaf=1, min_samples_split=2, random_state=340)
-# model = RandomForestClassifier(random_state=340)
+model = RandomForestClassifier(n_estimators=100, criterion='gini', min_samples_leaf=1, min_samples_split=2, random_state=16)
 model.fit(X_train, y_train)
-# print(model.score(X_train, y_train))
-# print(model.score(X_test, y_test))
+print(model.score(X_train, y_train))
+print(model.score(X_test, y_test))
 
 # Make predictions on the test set
 y_pred = model.predict(X_test)
@@ -67,19 +53,19 @@ print(f'Confusion Matrix:\n{conf_matrix}')
 print(f'Classification Report:\n{class_report}')
 
 """ Results of the above print statements:
-Accuracy: 95.01%
+Accuracy: 90.73%
 Confusion Matrix:
-[[933   7]
- [ 42   0]]
+[[881  59]
+ [ 32  10]]
 Classification Report:
               precision    recall  f1-score   support
 
-           0       0.96      0.99      0.97       940
-           1       0.00      0.00      0.00        42
+           0       0.96      0.94      0.95       940
+           1       0.14      0.24      0.18        42
 
-    accuracy                           0.95       982
-   macro avg       0.48      0.50      0.49       982
-weighted avg       0.92      0.95      0.93       982
+    accuracy                           0.91       982
+   macro avg       0.55      0.59      0.57       982
+weighted avg       0.93      0.91      0.92       982
 """
 
 #### Use in .ipynb for stats below to extract graphs ###

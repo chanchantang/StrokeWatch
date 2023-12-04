@@ -1,24 +1,14 @@
-# Stroke Susceptibility Prediction
-# SFU CMPT 340 Project Template -- Replace with project title
-This repository is a template for your CMPT 340 course project.
-Replace the title with your project title, and **add a snappy acronym that people remember (mnemonic)**.
+# StrokeWatch
 
-Add a 1-2 line summary of your project here.
-
-The Stroke Susceptibility Prediction app employs various machine learning models, such as random forest and logistic regression, to analyze individual health data and provide personalized risk assessments for stroke occurrence based on factors like age, medical history, and lifestyle.
+The StrokeWatch app employs various machine learning models, such as random forest and logistic regression, to analyze individual health data and provide personalized risk assessments for stroke occurrence based on factors like age, medical history, and lifestyle.
 
 ## Important Links
 
 | [Timesheet](https://1sfu-my.sharepoint.com/:x:/g/personal/kabhishe_sfu_ca/ERc0Vdpa4d9JsOf2QhltWxoBg9t34Slpekk71h27oCd2Yw?e=xaOhcR) | [Slack channel](https://app.slack.com/client/T05JYJAF22G/C05TGPB8D1A/docs/Qp:F05TE8BJEMR/1701591119214) | [Project report](https://www.overleaf.com/project/650c9edaf58339ecbee4649d) |
 |-----------|---------------|-------------------------|
 
-
-- Timesheet: Link your timesheet (pinned in your project's Slack channel) where you track per student the time and tasks completed/participated for this project/
-- Slack channel: Link your private Slack project channel.
-- Project report: Link your Overleaf project report document.
-
-
 ## Video/demo/GIF
+
 Record a short video (1:40 - 2 minutes maximum) or gif or a simple screen recording or even using PowerPoint with audio or with text, showcasing your work.
 
 
@@ -88,7 +78,7 @@ python evaluate.py --epochs=10 --data=/in/put/dir
 mkdir raw_data // maybe not needed
 cd src
 python src/run.py
-python src/stroke_application.py
+python src/app.py
 ```
 Data can be found at ...
 Output will be saved in ...
