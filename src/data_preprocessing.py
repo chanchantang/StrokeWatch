@@ -2,10 +2,15 @@
 # coding: utf-8
 
 import pandas as pd
+import sys
 
-INPUT_DATA_DIR = "./../raw_data/"
+INPUT_DATA_DIR = "../raw_data/"
 
-df = pd.read_csv(INPUT_DATA_DIR + "raw_data.csv")
+try: 
+    df = pd.read_csv(INPUT_DATA_DIR + "raw_data.csv")
+except FileNotFoundError as e:
+    print(f"{INPUT_DATA_DIR + 'raw_data.csv'} could not be found, please download the dataset")
+    sys.exit()
 
 # Check for null values in each column
 null_counts = df.isnull().sum()

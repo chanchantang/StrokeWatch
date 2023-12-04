@@ -6,9 +6,6 @@ import os
 import joblib
 import numpy as np
 import pandas as pd
-import webbrowser
-
-ctk.set_appearance_mode("dark")
 
 user_input={
 	'gender': None,
@@ -41,6 +38,7 @@ encoding = {
 }
 
 AVG_GLUCOSE = 105.3
+MODEL_PATH = '../saved_models/logistic_regression.joblib'
 
 class App(ctk.CTk):
     width = 600
@@ -49,6 +47,7 @@ class App(ctk.CTk):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
+        ctk.set_appearance_mode("dark")
         self.title("StrokeWatch")
         self.geometry(f"{self.width}x{self.height}")
         self.resizable(False, False)
@@ -284,7 +283,6 @@ class App(ctk.CTk):
         input = self.get_input()
 
         # Predict using model
-        model = joblib.load('../saved_models/logistic_regression.joblib')
         output = model.predict(input)
 
         self.glucose_frame.grid_forget()
@@ -333,11 +331,8 @@ class App(ctk.CTk):
         user_input["bmi"] = round((self.weight.get()/2.20462)/((self.height.get() * 0.0254)**2), 1)
         user_input["smoking_status"] = self.smoking_status.get()
 
-        # Get test data format in dataframe
-        TEST_DATA_PATH = "../raw_data/test_data.csv"
-        test_data = pd.read_csv(TEST_DATA_PATH)
-        new_data = test_data[0:0]
-        new_data = new_data.drop('stroke', axis=1)
+        # Create dataframe with same format as training data for user input
+        new_data = pd.DataFrame(columns=['Residence_type', 'age', 'avg_glucose_level', 'bmi', 'ever_married', 'gender', 'heart_disease', 'hypertension', 'smoking_status', 'work_type'])
         new_data = pd.concat([new_data, pd.Series()], ignore_index=True)
         new_data = new_data.drop(0, axis=1)
 
@@ -368,9 +363,12 @@ class App(ctk.CTk):
 
         # Return user input
         new_data = new_data.astype(new_data_dtype)
-        new_data.to_csv('../raw_data/new_data.csv', index=False)
         return new_data
 
 if __name__ == "__main__":
-    app = App()
-    app.mainloop()
+    try:
+        model = joblib.load(MODEL_PATH)
+        app = App()
+        app.mainloop()
+    except FileNotFoundError as e:
+        print(f"The model could not be found, please run run.py to create the model")
