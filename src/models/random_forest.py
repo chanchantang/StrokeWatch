@@ -80,5 +80,4 @@ weighted avg       0.93      0.91      0.92       982
 # plot_tree(clf, feature_names=X_train.columns, class_names={0:'Negative', 1:'Stroke'},  max_depth=3, filled=True)
 
 # To save/load model 
-dump(model, '../saved_models/' + 'decision_tree' + '.joblib')
-# loaded_clf = load('../saved_models/' + 'decision_tree.' + 'joblib')
+dump(model, '../saved_models/' + 'random_forest' + '.joblib')

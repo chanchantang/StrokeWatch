@@ -32,6 +32,7 @@ y_test = test_data['stroke']
 
 models = [decision_tree, logistic_regression, naive_bayes, random_forest, voting_classifier_hard, voting_classifier_soft]
 
+# Overall accuracy
 i = 0
 print('Accuracy\n--------')
 for model in models:
@@ -39,6 +40,7 @@ for model in models:
     print(f'{model_names[i]} {accuracy_score(y_test, y_pred)}')
     i += 1
 
+# Classification report
 i = 0
 print('Classification report\n--------')
 for model in models:
@@ -46,6 +48,7 @@ for model in models:
     print(f'{model_names[i]}\n {classification_report(y_test, y_pred)}')
     i += 1
 
+# Confusion matrix
 i = 0
 print('\nConfusion Matrix\n--------')
 for model in models:
@@ -57,3 +60,17 @@ for model in models:
     plt.show()
     i += 1
 
+# TPR and TNR 
+i = 0
+print('\nPositive and negative rates\n--------')
+for model in models:
+    y_pred = model.predict(X_test)
+    cm = confusion_matrix(y_test, y_pred)
+    TP = cm[1][1]
+    TN = cm[0][0]
+    FP = cm[0][1]
+    FN = cm[1][0]
+    print(model_names[i])
+    print(f"TPR rate: {round(TP/(TP + FN), 2) * 100}%")
+    print(f"TNR rate: {round(TN/(TN + FP), 2) * 100}%\n")
+    i += 1
