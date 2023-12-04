@@ -1,4 +1,4 @@
-# StrokeWatch
+# Stroke Susceptibility Prediction Using Five Machine Learning Models - StrokeWatch
 
 The StrokeWatch app employs various machine learning models, such as random forest and logistic regression, to analyze individual health data and provide personalized risk assessments for stroke occurrence based on factors like age, medical history, and lifestyle.
 
