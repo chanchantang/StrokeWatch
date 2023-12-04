@@ -31,6 +31,15 @@ categorical = {
     'smoking_status': ['formerly smoked', 'never smoked', 'smokes', 'Unknown']
 }
 
+# Changed key to {"Self-employed", "Children", "Government job", "Private", "Never worked"} and {"Smokes", "Never smoked", "Formerly smoked"}
+encoding = {
+    'Female': 0, 'Male': 1, 'Other': 2,
+    'No': 0, 'Yes': 1,
+    'Government job': 0, 'Never worked': 1, 'Private': 2, 'Self-employed': 3, 'Children': 4,
+    'Rural': 0, 'Urban': 1,
+    'Unknown': 0, 'Formerly smoked': 1, 'Never smoked': 2, 'Smokes': 3
+}
+
 AVG_GLUCOSE = 105.3
 
 class App(ctk.CTk):
@@ -53,18 +62,23 @@ class App(ctk.CTk):
 
         self.start_page()
 
+#"Are you ready to learn\nyour stroke risk?"
     def start_page(self):
         # Start menu
         self.start_frame = ctk.CTkFrame(self, corner_radius=0, fg_color="transparent")
         self.start_frame.grid(row=0, column=0, sticky="ns")
-        self.start_label = ctk.CTkLabel(self.start_frame, text="Are you ready to learn\nyour stroke risk?", font=ctk.CTkFont(size=30, weight="bold"))
-        self.start_label.grid(row=0, column=0, padx=30, pady=(150, 15))
+
+        self.title_label = ctk.CTkLabel(self.start_frame, text="StrokeWatch", font=ctk.CTkFont(size=30, weight="bold"))
+        self.title_label.grid(row=0, column=0, padx=30, pady=(150, 15))
+
+        self.question_label = ctk.CTkLabel(self.start_frame, text="Are you ready to learn\nyour stroke risk?", font=ctk.CTkFont(size=25,))
+        self.question_label.grid(row=1, column=0, padx=30, pady=(15, 15))
 
         self.disclaimer_label = ctk.CTkLabel(self.start_frame, text="Disclaimer: This assessment is in no way a\nmedical assessment. Please seek a medical\nprofessional for a proper evaluation", font=ctk.CTkFont(size=15), text_color='gray', anchor='w', justify='left')
-        self.disclaimer_label.grid(row=2, column=0, padx=30, pady=(75, 15))
+        self.disclaimer_label.grid(row=2, column=0, padx=30, pady=(25, 15))
 
         self.start_button = ctk.CTkButton(self.start_frame, text="Start", command=self.Q1_Self, width=400, height=40,       bg_color='blue')
-        self.start_button.grid(row=3, column=0, padx=30, pady=(100, 15))
+        self.start_button.grid(row=3, column=0, padx=30, pady=(75, 15))
 
         self.group_label = ctk.CTkLabel(self.start_frame, text="Created by: Jenna Liebe, Rheana Lopez, Luna Sang,\n\t Chanson Tang, and Samuel Wong", font=ctk.CTkFont(size=15), text_color='white', anchor='w', justify='left')
         self.group_label.grid(row=4, column=0, padx=30, pady=(50, 15))
@@ -79,14 +93,15 @@ class App(ctk.CTk):
         self.start_frame.grid_forget()
         self.self_frame = ctk.CTkFrame(self, corner_radius=0, fg_color="transparent")
         self.self_frame.grid(row=0, column=0, sticky="ns")
+
         self.gender_label = ctk.CTkLabel(self.self_frame, text="What is your gender?", font=ctk.CTkFont(size=20, weight="bold"))
         self.gender_label.grid(row=1, column=0, padx=30, pady=(100, 15), columnspan=2)
-        self.gender = tkinter.StringVar()
-        self.gender_button_1 = ctk.CTkRadioButton(self.self_frame, variable=self.gender, value='Male', text="Male")
+        self.gender = tkinter.IntVar()
+        self.gender_button_1 = ctk.CTkRadioButton(self.self_frame, variable=self.gender, value=encoding['Female'], text="Female")
         self.gender_button_1.grid(row=2, column=0, pady=10, padx=20, sticky="w")
-        self.gender_button_2 = ctk.CTkRadioButton(self.self_frame, variable=self.gender, value='Female', text="Female")
+        self.gender_button_2 = ctk.CTkRadioButton(self.self_frame, variable=self.gender, value=encoding['Male'], text="Male")
         self.gender_button_2.grid(row=3, column=0, pady=10, padx=20, sticky="w")
-        self.gender_button_3 = ctk.CTkRadioButton(self.self_frame, variable=self.gender, value='Other', text="Other")
+        self.gender_button_3 = ctk.CTkRadioButton(self.self_frame, variable=self.gender, value=encoding['Other'], text="Other")
         self.gender_button_3.grid(row=4, column=0, pady=10, padx=20, sticky="w")
         self.gender_button_1.invoke()
 
@@ -117,9 +132,9 @@ class App(ctk.CTk):
         self.married_label.grid(row=1, column=0, padx=30, pady=(100, 15), columnspan=2)
         self.ever_married = tkinter.IntVar()
         self.ever_married.set(1)
-        self.married_button_1 = ctk.CTkRadioButton(self.about_frame, variable=self.ever_married, value=1, text="Yes")
+        self.married_button_1 = ctk.CTkRadioButton(self.about_frame, variable=self.ever_married, value=encoding['Yes'], text="Yes")
         self.married_button_1.grid(row=2, column=0, pady=10, padx=20, sticky="w")
-        self.married_button_2 = ctk.CTkRadioButton(self.about_frame, variable=self.ever_married, value=0, text="No")
+        self.married_button_2 = ctk.CTkRadioButton(self.about_frame, variable=self.ever_married, value=encoding['No'], text="No")
         self.married_button_2.grid(row=3, column=0, pady=10, padx=20, sticky="w")
         self.married_button_1.invoke()
 
@@ -131,13 +146,13 @@ class App(ctk.CTk):
         self.work_menu.set("Self-employed")
         self.work_menu.grid(row=5, column=0, padx=30, pady=(15, 15), columnspan=2)
 
-        self.residence_type = tkinter.StringVar()
-        self.residence_type.set('Urban')
+        self.residence_type = tkinter.IntVar()
+        self.residence_type.set(1)
         self.residence_label = ctk.CTkLabel(self.about_frame, text="What is your residence type?", font=ctk.CTkFont(size=20, weight="bold"))
         self.residence_label.grid(row=6, column=0, padx=30, pady=(50, 15), columnspan=2)
-        self.residence_button_1 = ctk.CTkRadioButton(self.about_frame, variable=self.residence_type, value="Urban", text="Urban")
+        self.residence_button_1 = ctk.CTkRadioButton(self.about_frame, variable=self.residence_type, value=encoding['Urban'], text="Urban")
         self.residence_button_1.grid(row=7, column=0, pady=10, padx=20, sticky="w")
-        self.residence_button_2 = ctk.CTkRadioButton(self.about_frame, variable=self.residence_type, value="Rural", text="Rural")
+        self.residence_button_2 = ctk.CTkRadioButton(self.about_frame, variable=self.residence_type, value=encoding['Rural'], text="Rural")
         self.residence_button_2.grid(row=8, column=0, pady=10, padx=20, sticky="w")
         self.residence_button_1.invoke()
 
@@ -301,7 +316,7 @@ class App(ctk.CTk):
         # Erase current frame and go to previous_frame
         current_frame.grid_forget()
         previous_question()
-
+    
     def get_input(self):
         # Put user input into dataframe
         if self.skip:
@@ -315,10 +330,11 @@ class App(ctk.CTk):
         user_input["heart_disease"] = self.heart_disease.get()
         user_input["ever_married"] = self.ever_married.get()
         user_input["work_type"] = self.work_type.get()
-        user_input["Residence_type"] = self.residence_type.get()
+        user_input["Residence_type"] = int(self.residence_type.get())
         user_input["bmi"] = round((self.weight.get()/2.20462)/((self.height.get() * 0.0254)**2), 1)
         user_input["smoking_status"] = self.smoking_status.get()
 
+        # Get test data format in dataframe
         TEST_DATA_PATH = "../raw_data/test_data.csv"
         test_data = pd.read_csv(TEST_DATA_PATH)
         new_data = test_data[0:0]
@@ -326,23 +342,33 @@ class App(ctk.CTk):
         new_data = pd.concat([new_data, pd.Series()], ignore_index=True)
         new_data = new_data.drop(0, axis=1)
 
-        # Fill in numerical
+        # Fill in user input
         new_data.at[0, 'age'] = user_input['age']
         new_data.at[0, 'hypertension'] = user_input['hypertension']
         new_data.at[0, 'heart_disease'] = user_input['heart_disease']
         new_data.at[0, 'bmi'] = user_input['bmi']
         new_data.at[0, 'avg_glucose_level'] = user_input['avg_glucose_level']
+        new_data.at[0, 'gender'] = user_input['gender']
+        new_data.at[0, 'ever_married'] = user_input['ever_married']
+        new_data.at[0, 'work_type'] = encoding[user_input['work_type']]
+        new_data.at[0, 'Residence_type'] = user_input['Residence_type']
+        new_data.at[0, 'smoking_status'] = encoding[user_input['smoking_status']]
 
-        # Fill in categorical dummy columns
-        for col in new_data:
-            for category in categorical:
-                for value in categorical[category]:
-                    if category + "_" + value == col:
-                        if user_input[category] == value:
-                            new_data.at[0, category + "_" + value] = True
-                        else:
-                            new_data.at[0, category + "_" + value] = False
+        new_data_dtype = {
+            'age': float,
+            'hypertension': int,
+            'heart_disease': int,
+            'bmi': float,
+            'avg_glucose_level': float,
+            'gender': int,
+            'ever_married': int,
+            'work_type': int,
+            'Residence_type': int,
+            'smoking_status': int
+        }
 
+        # Return user input
+        new_data = new_data.astype(new_data_dtype)
         new_data.to_csv('../raw_data/new_data.csv', index=False)
         return new_data
 
