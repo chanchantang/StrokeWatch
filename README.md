@@ -57,39 +57,28 @@ repository
 In order to install StrokeWatch, along with its associated data and machine learning models, please follow the steps given here:
 
 ```bash
-git clone $THISREPO
+git clone [$THISREPO](https://github.com/sfu-cmpt340/project_03.git)
 cd $THISREPO
-pip install -r requirements.txt // TODO: update in the end with app
+pip install -r requirements.txt 
 ```
 
 <a name="repro"></a>
 ## 3. Reproduction
-Demonstrate how your work can be reproduced, e.g. the results in your report.
+The StrokeWatch can be run through the run.py, all the data downloading and preprocessing will be done through this run.py.
 ```bash
-mkdir tmp && cd tmp
-wget https://yourstorageisourbusiness.com/dataset.zip
-unzip dataset.zip
-conda activate amazing
-python evaluate.py --epochs=10 --data=/in/put/dir
-
-mkdir raw_data // maybe not needed
 cd src
 python src/run.py
-python src/app.py
 ```
-Data can be found at ...
-Output will be saved in ...
+Data can be found at raw_data folder after running the run.py 
 
-<a name="guide"></a>
-## 4. Guidance
-// TODO: do we need this section?
-- Use [git](https://git-scm.com/book/en/v2)
-    - Do NOT use history re-editing (rebase)
-    - Commit messages should be informative:
-        - No: 'this should fix it', 'bump' commit messages
-        - Yes: 'Resolve invalid API call in updating X'
-    - Do NOT include IDE folders (.idea), or hidden files. Update your .gitignore where needed.
-    - Do NOT use the repository to upload data
-- Use [VSCode](https://code.visualstudio.com/) or a similarly powerful IDE
-- Use [Copilot for free](https://dev.to/twizelissa/how-to-enable-github-copilot-for-free-as-student-4kal)
-- Sign up for [GitHub Education](https://education.github.com/) 
+To reproduce the results in the report:
+```bash
+cd src
+python src/model_stats.py
+```
+
+To show the statistics of the dataset:
+```bash
+cd src
+python src/dataset_statistics.py
+```
