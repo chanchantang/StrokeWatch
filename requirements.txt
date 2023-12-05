@@ -71,3 +71,7 @@ traitlets==5.9.0
 tzdata==2023.3
 virtualenv==20.19.0
 wcwidth==0.2.6
+
+kaggle~=1.5.16
+imblearn~=0.0
+seaborn~=0.12.2
