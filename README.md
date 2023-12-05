@@ -7,10 +7,9 @@ The StrokeWatch app employs various machine learning models, such as random fore
 | [Timesheet](https://1sfu-my.sharepoint.com/:x:/g/personal/kabhishe_sfu_ca/ERc0Vdpa4d9JsOf2QhltWxoBg9t34Slpekk71h27oCd2Yw?e=xaOhcR) | [Slack channel](https://app.slack.com/client/T05JYJAF22G/C05TGPB8D1A/docs/Qp:F05TE8BJEMR/1701591119214) | [Project report](https://www.overleaf.com/project/650c9edaf58339ecbee4649d) |
 |-----------|---------------|-------------------------|
 
-## Video/demo/GIF
+## Video
 
-Record a short video (1:40 - 2 minutes maximum) or gif or a simple screen recording or even using PowerPoint with audio or with text, showcasing your work.
-
+[![Watch the video](https://img.youtube.com/vi/5KdVeHabZSk/maxresdefault.jpg)](https://youtu.be/5KdVeHabZSk)
 
 ## Table of Contents
 1. [Demo](#demo)
