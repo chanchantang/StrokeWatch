@@ -34,9 +34,9 @@ parameters = clf.get_params()
 feature_importance = pd.DataFrame(clf.feature_importances_, index = X_train.columns)
 
 # Print the results
-print(f'Accuracy: {round(accuracy*100, ndigits = 2)}%')
-print(f'Confusion Matrix:\n{cm}')
-print(f'Classification Report:\n{report}')
+#print(f'Accuracy: {round(accuracy*100, ndigits = 2)}%')
+#print(f'Confusion Matrix:\n{cm}')
+#print(f'Classification Report:\n{report}')
 
 """ Results of the above print statements:
 Accuracy: 91.45%

@@ -49,9 +49,9 @@ log_reg_accuracy = accuracy_score(y_test, y_prediction)
 log_reg_confusion_matrix = confusion_matrix(y_test, y_prediction)
 log_reg_classification_report = classification_report(y_test, y_prediction)
 
-print(f'Accuracy: {round(log_reg_accuracy*100, ndigits = 2)}%')
-print('Classification Report:\n', log_reg_classification_report)
-print('Confusion Matrix:\n', log_reg_confusion_matrix)
+#print(f'Accuracy: {round(log_reg_accuracy*100, ndigits = 2)}%')
+#print('Classification Report:\n', log_reg_classification_report)
+#print('Confusion Matrix:\n', log_reg_confusion_matrix)
 
 """ Results of the above print statements:
 Accuracy:  93.99%

@@ -31,9 +31,9 @@ conf_matrix = confusion_matrix(y_test, y_pred)
 class_report = classification_report(y_test, y_pred)
 
 # Print the results
-print(f'Accuracy: {round(accuracy*100, ndigits = 2)}%')
-print(f'Confusion Matrix:\n{conf_matrix}')
-print(f'Classification Report:\n{class_report}')
+#print(f'Accuracy: {round(accuracy*100, ndigits = 2)}%')
+#print(f'Confusion Matrix:\n{conf_matrix}')
+#print(f'Classification Report:\n{class_report}')
 
 """ Results of the above print statements:
 Accuracy: 73.42%

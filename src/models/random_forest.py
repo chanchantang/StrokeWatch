@@ -36,8 +36,8 @@ y_test = test_data['stroke']
 
 model = RandomForestClassifier(n_estimators=100, criterion='gini', min_samples_leaf=1, min_samples_split=2, random_state=16)
 model.fit(X_train, y_train)
-print(model.score(X_train, y_train))
-print(model.score(X_test, y_test))
+#print(model.score(X_train, y_train))
+#print(model.score(X_test, y_test))
 
 # Make predictions on the test set
 y_pred = model.predict(X_test)
@@ -48,9 +48,9 @@ conf_matrix = confusion_matrix(y_test, y_pred)
 class_report = classification_report(y_test, y_pred)
 
 # Print the results
-print(f'Accuracy: {round(accuracy*100, ndigits = 2)}%')
-print(f'Confusion Matrix:\n{conf_matrix}')
-print(f'Classification Report:\n{class_report}')
+#print(f'Accuracy: {round(accuracy*100, ndigits = 2)}%')
+#print(f'Confusion Matrix:\n{conf_matrix}')
+#print(f'Classification Report:\n{class_report}')
 
 """ Results of the above print statements:
 Accuracy: 90.73%

@@ -47,6 +47,7 @@ class App(ctk.CTk):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
+        # Settings
         ctk.set_appearance_mode("dark")
         self.title("StrokeWatch")
         self.geometry(f"{self.width}x{self.height}")
@@ -60,6 +61,7 @@ class App(ctk.CTk):
         self.iconbitmap('')
 
         self.start_page()
+        print('StrokeWatch is running \U0001FA7A')
 
     def start_page(self):
         # Start menu
@@ -72,7 +74,7 @@ class App(ctk.CTk):
         self.question_label = ctk.CTkLabel(self.start_frame, text="Are you ready to learn\nyour stroke risk?", font=ctk.CTkFont(size=25,))
         self.question_label.grid(row=1, column=0, padx=30, pady=(15, 15))
 
-        self.disclaimer_label = ctk.CTkLabel(self.start_frame, text="Disclaimer: This assessment is in no way a\nmedical assessment. Please seek a medical\nprofessional for a proper evaluation", font=ctk.CTkFont(size=15), text_color='gray', anchor='w', justify='left')
+        self.disclaimer_label = ctk.CTkLabel(self.start_frame, text="Disclaimer: This assessment is in no way a\nmedical assessment. Please seek a medical\nprofessional for a proper evaluation.", font=ctk.CTkFont(size=15), text_color='gray', anchor='w', justify='left')
         self.disclaimer_label.grid(row=2, column=0, padx=30, pady=(25, 15))
 
         self.start_button = ctk.CTkButton(self.start_frame, text="Start", command=self.Q1_Self, width=400, height=40,       bg_color='blue')
@@ -370,5 +372,6 @@ if __name__ == "__main__":
         model = joblib.load(MODEL_PATH)
         app = App()
         app.mainloop()
+        print("StrokeWatch is closing now \U0001F44B")
     except FileNotFoundError as e:
         print(f"The model could not be found, please run run.py to create the model")

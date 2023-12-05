@@ -43,19 +43,19 @@ df_cleaned.shape
 
 # Split training and testing data
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, stratify=y, random_state=340)
-print('Ratio of nonstrokes/strokes in training data: {}'.format(sum(y_train == 0)/sum(y_train == 1)))
-print('Ratio of nonstrokes/strokes in testing data: {} \n'.format(sum(y_test == 0)/sum(y_test == 1)))
+#print('Ratio of nonstrokes/strokes in training data: {}'.format(sum(y_train == 0)/sum(y_train == 1)))
+#print('Ratio of nonstrokes/strokes in testing data: {} \n'.format(sum(y_test == 0)/sum(y_test == 1)))
 
-print("Before OverSampling, counts of label '1': {}".format(sum(y_train == 1))) 
-print("Before OverSampling, counts of label '0': {} \n".format(sum(y_train == 0)))
+#print("Before OverSampling, counts of label '1': {}".format(sum(y_train == 1))) 
+#print("Before OverSampling, counts of label '0': {} \n".format(sum(y_train == 0)))
 
 # Use SMOTE to create stroke samples from the training data
 sm = SMOTE(k_neighbors=5)
 
 X_train_res, y_train_res = sm.fit_resample(X_train, y_train)
 
-print("After OverSampling, counts of label '1': {}".format(sum(y_train_res == 1)))
-print("After OverSampling, counts of label '0': {}".format(sum(y_train_res == 0)))
+#print("After OverSampling, counts of label '1': {}".format(sum(y_train_res == 1)))
+#print("After OverSampling, counts of label '0': {}".format(sum(y_train_res == 0)))
 
 # Create new file with new training data
 train_data = X_train_res
