@@ -36,8 +36,7 @@ for img in imgs:
 ```
 
 ### What to find where
-
-Explain briefly what files are found where
+The repository is laid out as follows:
 
 ```bash
 repository
@@ -55,8 +54,7 @@ repository
 
 ## 2. Installation
 
-Provide sufficient instructions to reproduce and install your project. 
-Provide _exact_ versions, test on CSIL or reference workstations.
+In order to install StrokeWatch, along with its associated data and machine learning models, please follow the steps given here:
 
 ```bash
 git clone $THISREPO
@@ -84,7 +82,7 @@ Output will be saved in ...
 
 <a name="guide"></a>
 ## 4. Guidance
-
+// TODO: do we need this section?
 - Use [git](https://git-scm.com/book/en/v2)
     - Do NOT use history re-editing (rebase)
     - Commit messages should be informative:
