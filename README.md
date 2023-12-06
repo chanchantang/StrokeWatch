@@ -43,12 +43,13 @@ repository
 
 In order to install StrokeWatch, along with its associated data and machine learning models, please follow the steps given here:
 
+Python 3.10.12 or newer is required.
+
 ```bash
 git clone https://github.com/sfu-cmpt340/project_03.git
 cd project_03
 pip install -r requirements.txt 
 ```
-Note: python version newer than installed in requirements will be fine.
 
 <a name="repro"></a>
 ## 3. Reproduction
@@ -57,16 +58,10 @@ The StrokeWatch can be run through the run.py, all the data downloading and prep
 cd src
 python run.py
 ```
-Data can be found at raw_data folder after running the run.py 
+The data can be found in the raw_data folder after running the run.py 
 
 To reproduce the results in the report:
 ```bash
 cd src
 python model_stats.py
-```
-
-To show the statistics of the dataset:
-```bash
-cd src
-python dataset_statistics.py
 ```

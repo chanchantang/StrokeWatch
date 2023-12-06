@@ -8,6 +8,7 @@ import seaborn as sns
 import numpy as np
 import math
 from sklearn.preprocessing import LabelEncoder
+import sys
 
 def load_dataset(dataset_path):
     df = pd.read_csv(dataset_path)
@@ -16,8 +17,12 @@ def load_dataset(dataset_path):
     return features, labels, df
 
 dataset_path = "./../raw_data/raw_data.csv"
+try:
+    features, labels, df = load_dataset(dataset_path)
+except FileNotFoundError as e:
+    print(f"{e}, please ensure you the dataset has been downloaded")
+    sys.exit()
 
-features, labels, df = load_dataset(dataset_path)
 df = df.dropna()
 
 
