@@ -48,9 +48,7 @@ repository
 │       └──    random_forest.py
 │       └──    voting_classifier.py
 ├── raw_data                     ## data imported and created
-├── raw_data_old                 ## data imported and created using old encoding
 ├── saved_models                 ## machine learning models
-├── saved_models_old             ## machine learning models using old preprocessing
 ├── README.md                    ## You are here
 ├── requirements.txt             ## requirements
 ```
@@ -62,8 +60,8 @@ repository
 In order to install StrokeWatch, along with its associated data and machine learning models, please follow the steps given here:
 
 ```bash
-git clone [$THISREPO](https://github.com/sfu-cmpt340/project_03.git)
-cd $THISREPO
+git clone https://github.com/sfu-cmpt340/project_03.git
+cd project_03
 pip install -r requirements.txt 
 ```
 
