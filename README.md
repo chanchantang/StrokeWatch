@@ -33,6 +33,7 @@ repository
 │   └── models                   ## model and stat creation
 ├── raw_data                     ## data imported and created
 ├── saved_models                 ## machine learning models
+├── output                       ## the output from model_stats that we use in our report
 ├── README.md                    ## You are here
 ├── requirements.txt             ## requirements
 ```
@@ -53,12 +54,12 @@ pip install -r requirements.txt
 
 <a name="repro"></a>
 ## 3. Reproduction
-The StrokeWatch can be run through the run.py, all the data downloading and preprocessing will be done through this run.py.
+The StrokeWatch app can be run through the run.py. All the data downloading and preprocessing will be done through this run.py.
 ```bash
 cd src
 python run.py
 ```
-The data can be found in the raw_data folder after running the run.py 
+Data can be found in the raw_data folder after running run.py.
 
 To reproduce the results in the report:
 ```bash
