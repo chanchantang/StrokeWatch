@@ -1,6 +1,7 @@
 # Stroke Susceptibility Prediction Using Five Machine Learning Models - StrokeWatch
 
-The StrokeWatch app employs various machine learning models, including random forest, logistic regression, naive bayes, decision tree and voting classifier to analyze individual health data and provide personalized risk assessments for stroke occurrence based on factors like age, medical history, and lifestyle.
+The StrokeWatch app employs a logistic regression machine learning model to analyze individual health data and provide personalized risk assessments for stroke occurrence based on factors like age, medical history, and lifestyle.
+This model was chosen as the best-suited for StrokeWatch after a comparison of the accuracy and statistics of five different machine learning models: logistic regression, random forest, naive bayes, decision tree and voting classifier.
 
 ## Important Links
 
@@ -21,17 +22,7 @@ The StrokeWatch app employs various machine learning models, including random fo
 
 <a name="demo"></a>
 ## 1. Example demo
-
-// TODO: should this be the stats or the app?
-
-A minimal example to showcase your work
-
-```python
-from amazing import amazingexample
-imgs = amazingexample.demo()
-for img in imgs:
-    view(img)
-```
+Once you have StrokeWatch installed and running, you're good to go - please refer to the video linked above for a demonstration of the app.
 
 ### What to find where
 The repository is laid out as follows:
@@ -40,11 +31,6 @@ The repository is laid out as follows:
 repository
 ├── src                          ## source code of the package itself
 │   └── models                   ## model and stat creation
-│       └──    decision_tree.py
-│       └──    logistic_regression.py
-│       └──    naive_bayes.py
-│       └──    random_forest.py
-│       └──    voting_classifier.py
 ├── raw_data                     ## data imported and created
 ├── saved_models                 ## machine learning models
 ├── README.md                    ## You are here
@@ -62,6 +48,7 @@ git clone https://github.com/sfu-cmpt340/project_03.git
 cd project_03
 pip install -r requirements.txt 
 ```
+Note: python version newer than installed in requirements will be fine.
 
 <a name="repro"></a>
 ## 3. Reproduction
