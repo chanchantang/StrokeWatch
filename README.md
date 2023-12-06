@@ -18,8 +18,6 @@ The StrokeWatch app employs various machine learning models, including random fo
 
 3. [Reproducing this project](#repro)
 
-4. [Guidance](#guide)
-
 
 <a name="demo"></a>
 ## 1. Example demo
