@@ -44,7 +44,7 @@ def app():
 def main():
     download(True)
     preprocess()
-    model_building('logistic_regression')
+    model_building()
     app()
 
 if __name__ == "__main__":
