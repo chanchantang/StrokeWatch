@@ -1,4 +1,5 @@
 import sys
+import argparse
 
 DATA_FETCHING_PATH = 'data_fetching.py'
 DATA_PREPROCESSING_PATH = 'data_preprocessing.py'
@@ -41,8 +42,8 @@ def model_building(model=None):
 def app():
     exec(stroke_app, globals())
 
-def main():
-    download(True)
+def main(dlData):
+    download(dlData)
     preprocess()
     model_building('logistic_regression')
     app()
@@ -55,5 +56,9 @@ if __name__ == "__main__":
     except FileNotFoundError as e:
         print(f"{e}, please ensure you are on the correct path")
         sys.exit()
-    
-    main()
+
+    parser = argparse.ArgumentParser(description="Download data (optional), preprocess data, run model, and run app",
+                                 formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    parser.add_argument("-d", "--download", help="Downloads the data for the model", action='store_true', default=False)
+    args = parser.parse_args()
+    main(args.download)
