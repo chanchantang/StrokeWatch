@@ -33,6 +33,7 @@ repository
 │   └── models                   ## model and stat creation
 ├── raw_data                     ## data imported and created
 ├── saved_models                 ## machine learning models
+├── output                       ## the output from model_stats that we use in our report
 ├── README.md                    ## You are here
 ├── requirements.txt             ## requirements
 ```
@@ -59,13 +60,14 @@ python run.py
 ```
 Data can be found in the raw_data folder after running the run.py.
 
-To reproduce the results in the report:
+To reproduce the results in the report (must be done after running run.py):
 ```bash
 cd src
 python model_stats.py
 ```
+Output can be found at ouput folder after running model_stats.py
 
-To show the statistics of the dataset:
+To show the statistics of the dataset (must be done after running run.py):
 ```bash
 cd src
 python dataset_statistics.py
