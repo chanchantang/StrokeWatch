@@ -52,12 +52,12 @@ Note: python version newer than installed in requirements will be fine.
 
 <a name="repro"></a>
 ## 3. Reproduction
-The StrokeWatch can be run through the run.py, all the data downloading and preprocessing will be done through this run.py.
+The StrokeWatch app can be run through the run.py. All the data downloading and preprocessing will be done through this run.py.
 ```bash
 cd src
 python run.py
 ```
-Data can be found at raw_data folder after running the run.py 
+Data can be found in the raw_data folder after running the run.py.
 
 To reproduce the results in the report:
 ```bash
