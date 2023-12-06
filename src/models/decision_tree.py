@@ -4,12 +4,18 @@ from sklearn.tree import DecisionTreeClassifier, plot_tree
 from sklearn.model_selection import GridSearchCV
 from sklearn. metrics import accuracy_score, classification_report, confusion_matrix, ConfusionMatrixDisplay
 from joblib import dump, load
+import sys
 
 # Import preprocessed data
 train_data_path = '../raw_data/train_data.csv'
 test_data_path = '../raw_data/test_data.csv'
-train_data = pd.read_csv(train_data_path)
-test_data  = pd.read_csv(test_data_path)
+
+try: 
+    train_data = pd.read_csv(train_data_path)
+    test_data  = pd.read_csv(test_data_path)
+except FileNotFoundError as e:
+    print(f"{e}, please download the dataset")
+    sys.exit()
 
 # Unnamed column in prepocessed data? Removing for now
 # train_data = train_data.drop(columns=train_data.columns[0], axis=1)

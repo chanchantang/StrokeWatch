@@ -57,7 +57,7 @@ if __name__ == "__main__":
         print(f"{e}, please ensure you are on the correct path")
         sys.exit()
 
-    parser = argparse.ArgumentParser(description="Download data (optional), preprocess data, run model, and run app",
+    parser = argparse.ArgumentParser(description="Download data (optional), preprocess data, create models, and run app",
                                  formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument("-d", "--download", help="Downloads the data for the model", action='store_true', default=False)
     args = parser.parse_args()

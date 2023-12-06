@@ -54,7 +54,7 @@ pip install -r requirements.txt
 
 <a name="repro"></a>
 ## 3. Reproduction
-The StrokeWatch app can be run through the run.py. All the data downloading and preprocessing will be done through this run.py.
+The StrokeWatch app can be run through run.py. All the data downloading and preprocessing will be done through run.py.
 For first-time use, please make sure to set the -d/--download flag so that the required data is downloaded:
 ```bash
 cd src

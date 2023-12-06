@@ -5,12 +5,18 @@ from sklearn.metrics import accuracy_score, classification_report, confusion_mat
 from sklearn.preprocessing import StandardScaler
 from sklearn.naive_bayes import MultinomialNB
 from joblib import dump
+import sys
+
 # Load the datasets
 train_data_path = '../raw_data/train_data.csv'
 test_data_path = '../raw_data/test_data.csv'
 
-train_data = pd.read_csv(train_data_path)
-test_data = pd.read_csv(test_data_path)
+try: 
+   train_data = pd.read_csv(train_data_path)
+   test_data  = pd.read_csv(test_data_path)
+except FileNotFoundError as e:
+   print(f"{e}, please download the dataset")
+   sys.exit()
 
 x_train = train_data.drop('stroke', axis=1)
 y_train = train_data['stroke']
