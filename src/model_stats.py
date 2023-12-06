@@ -91,8 +91,8 @@ with open(output_path, 'a') as file:
         file.write(f'{model_names[i]}\n {cm}\n')
         cm_display = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=model.classes_)
         cm_display.plot()
-        #plt.title(model_names[i])
-        #plt.savefig(f'../output/{model_names[i]}_confusion_matrix.png')
+        plt.title(model_names[i])
+        plt.savefig(f'../output/{model_names[i]}_confusion_matrix.png')
         #plt.show()
         i += 1
 
