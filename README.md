@@ -55,11 +55,14 @@ pip install -r requirements.txt
 <a name="repro"></a>
 ## 3. Reproduction
 The StrokeWatch app can be run through the run.py. All the data downloading and preprocessing will be done through this run.py.
+For first-time use, please make sure to set the -d/--download flag so that the required data is downloaded:
 ```bash
 cd src
-python run.py
+python run.py -d
 ```
-Data can be found in the raw_data folder after running run.py.
+If the data is not downloaded, you will receive an error message asking you to download the dataset; this instruction refers to setting the -d/--download flag when calling run.py. In subsequent calls, the -d/--download flag may be excluded to prevent a re-download of the data. 
+
+The original data, along with the pre-processed and model testing/training data, can be found in the raw_data folder after running run.py.
 
 To reproduce the results in the report:
 ```bash
